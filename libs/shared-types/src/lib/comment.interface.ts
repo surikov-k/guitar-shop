@@ -1,8 +1,6 @@
-import { User } from './user.interface';
-
 export interface Comment {
   id?: number;
-  author: User;
+  userId: number;
   advantages: string;
   disadvantages: string;
   text: string;

@@ -27,12 +27,12 @@ model User {
 }
 
 model Guitar {
-  id            Int        @id @default(autoincrement())
+  id            Int       @id @default(autoincrement())
   name          String
   description   String
-  addedAt       DateTime   @default(now())
+  addedAt       DateTime  @default(now())
   photo         String
-  type          GuitarType
+  type          String
   code          String
   stringsNumber Int
   rating        Decimal
