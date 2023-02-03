@@ -1,5 +1,6 @@
 import { User } from '@guitar-shop/shared-types';
 import { compare, genSalt, hash } from 'bcrypt';
+
 import { SALT_ROUNDS } from './shop-user.constants';
 
 export class ShopUserEntity implements User {

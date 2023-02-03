@@ -1,1 +1,6 @@
-export type StringNumber = 4 | 6 | 7 | 12
+export enum StringNumber {
+  'four'= 4,
+  'six' = 6,
+  'seven' = 7,
+  'twelve' = 12,
+}
