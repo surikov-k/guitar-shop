@@ -1,7 +1,7 @@
-import { Expose } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
+import { Expose } from 'class-transformer';
 
-export class UserRdo {
+export class LoggedRdo {
   @ApiProperty({
     description: 'User\'s unique id',
     example: 100
@@ -17,16 +17,9 @@ export class UserRdo {
   public email: string;
 
   @ApiProperty({
-    description: 'User\'s name',
-    example: 'Abby Montgomery'
+    description: 'Access token',
+    example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
   })
   @Expose()
-  public name: string;
-
-  @ApiProperty({
-    description: 'Is the user admin or not',
-    example: true
-  })
-  @Expose()
-  public isAdmin: boolean;
+  public accessToken: string;
 }
