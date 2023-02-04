@@ -1,8 +1,9 @@
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { ShopUserRepository } from '../shop-user/shop-user.repository';
 import { LoginDto, RegisterDto } from './dto';
 import { ShopUserEntity } from '../shop-user/shop-user.entity';
 import { User } from '@guitar-shop/shared-types';
+import { AuthError } from './auth.constants';
 
 @Injectable()
 export class AuthService {
@@ -15,7 +16,7 @@ export class AuthService {
     const existedUser = await this.shopUserRepository.findByEmail(email);
 
     if (existedUser) {
-      throw new Error('User exists')
+      throw new BadRequestException(AuthError.ALREADY_EXISTS)
     }
 
     const userEntity = await new ShopUserEntity(userData ).setPassword(password);
@@ -27,13 +28,13 @@ export class AuthService {
     const user = await  this.shopUserRepository.findByEmail(email);
 
     if (!user) {
-      throw new UnauthorizedException('Wrong email or password');
+      throw new UnauthorizedException(AuthError.WRONG_CREDENTIALS);
     }
 
     const entity = new ShopUserEntity(user);
 
     if (!await entity.comparePassword(password)) {
-      throw new UnauthorizedException('Wrong email or password');
+      throw new UnauthorizedException(AuthError.WRONG_CREDENTIALS);
     }
 
     return entity.toObject();
@@ -42,7 +43,7 @@ export class AuthService {
   async get(id) {
     const user =  await this.shopUserRepository.findById(id)
     if (!user) {
-      throw new NotFoundException('User not found');
+      throw new NotFoundException(AuthError.NOT_FOUND);
     }
     return user;
   }
