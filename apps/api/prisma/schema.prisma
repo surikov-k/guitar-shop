@@ -26,16 +26,15 @@ model User {
   comments     Comment[]
 }
 
-model Guitar {
+model ShopItem {
   id            Int       @id @default(autoincrement())
   name          String
   description   String
   addedAt       DateTime  @default(now())
   photo         String
-  type          String
+  type          GuitarType
   code          String
   stringsNumber Int
-  rating        Decimal
   price         Decimal
   comments      Comment[]
 }
@@ -46,9 +45,9 @@ model Comment {
   advantages    String
   disadvantages String
   text          String
-  rating        Decimal
+  rating        Int
   createdAt     DateTime @default(now())
   userId        Int
-  guitar        Guitar?  @relation(fields: [guitarId], references: [id])
-  guitarId      Int?
+  shopItem      ShopItem?  @relation(fields: [shopItemId], references: [id])
+  shopItemId    Int?
 }

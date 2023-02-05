@@ -1,0 +1,28 @@
+### Get shop items list
+GET localhost:3330/api/item?sort=price&direction=asc&type=electric&strings=6&limit=2&page=2 HTTP/1.1
+
+### Get a shop item
+GET localhost:3330/api/item/5 HTTP/1.1
+
+### Create a new shop item
+POST localhost:3330/api/item HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Gibson Les Paul Traditional Pro V",
+  "description": "Anyway, your Grandpa hit him with the car and brought him into the house. He seemed so helpless, like a little lost puppy, and my heart just went out to him.",
+  "photo":  "gibson-1.jpg",
+  "type": "Electric",
+  "code":  "1500000000287968",
+  "stringsNumber": 6,
+  "price":  2399
+}
+
+### Update a shop item
+PATCH localhost:3330/api/item/6 HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Schecter Guitar Research C-1",
+  "code": "234523452345"
+}

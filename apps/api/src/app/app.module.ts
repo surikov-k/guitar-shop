@@ -6,18 +6,20 @@ import { AuthModule } from './auth/auth.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ENV_FILE_PATH } from './app.constants';
 import { validateEnvironment } from './env.validation';
+import { ShopItemModule } from './shop-item/shop-item.module';
 
 @Module({
   imports: [
-    ShopUserModule,
     AuthModule,
-    PrismaModule,
     ConfigModule.forRoot({
       cache: true,
-      isGlobal: true,
       envFilePath: ENV_FILE_PATH,
+      isGlobal: true,
       validate: validateEnvironment,
-    })
+    }),
+    PrismaModule,
+    ShopItemModule,
+    ShopUserModule,
   ],
   controllers: [],
   providers: [],
