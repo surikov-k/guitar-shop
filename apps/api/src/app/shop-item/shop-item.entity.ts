@@ -1,6 +1,5 @@
 import { Entity } from '@guitar-shop/core';
 import { Comment, Guitar, GuitarType, StringNumber } from '@guitar-shop/shared-types';
-import { Prisma } from '@prisma/client';
 
 export class ShopItemEntity implements Entity<ShopItemEntity>, Guitar {
   public addedAt: Date;
@@ -10,7 +9,8 @@ export class ShopItemEntity implements Entity<ShopItemEntity>, Guitar {
   public id: number;
   public name: string;
   public photo: string;
-  public price: Prisma.Decimal;
+  public price: number;
+  public rating: number;
   public stringsNumber: StringNumber;
   public type: GuitarType;
 
@@ -25,7 +25,8 @@ export class ShopItemEntity implements Entity<ShopItemEntity>, Guitar {
     this.description = entity.description;
     this.name = entity.name;
     this.photo = entity.photo;
-    this.price = new Prisma.Decimal(entity.price);
+    this.price = entity.price;
+    this.rating = entity.rating;
     this.stringsNumber = entity.stringsNumber;
     this.type = entity.type;
   }
@@ -36,4 +37,5 @@ export class ShopItemEntity implements Entity<ShopItemEntity>, Guitar {
       comments: this.comments.map(({ id }) => ({ id }))
     };
   }
+
 }

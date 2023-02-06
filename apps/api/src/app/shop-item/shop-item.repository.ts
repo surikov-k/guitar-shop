@@ -32,7 +32,9 @@ export class ShopItemRepository implements CrudRepository<ShopItemEntity, number
   public async findById(id: number): Promise<Guitar | null> {
     return this.prisma.shopItem.findFirst({
       where: { id },
-      include: { comments: true }
+      include: {
+        comments: true,
+      }
     })
   }
 
@@ -43,7 +45,7 @@ export class ShopItemRepository implements CrudRepository<ShopItemEntity, number
       const sortOption  = {
         price: { price: direction },
         added: { addedAt: direction },
-        rating: {}
+        rating: {rating: direction}
       }
       return sortOption[type];
     }

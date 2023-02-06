@@ -7,6 +7,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { ENV_FILE_PATH } from './app.constants';
 import { validateEnvironment } from './env.validation';
 import { ShopItemModule } from './shop-item/shop-item.module';
+import { ItemCommentModule } from './item-comment/item-comment.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ShopItemModule } from './shop-item/shop-item.module';
       validate: validateEnvironment,
     }),
     PrismaModule,
+    ItemCommentModule,
     ShopItemModule,
     ShopUserModule,
   ],

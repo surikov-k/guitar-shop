@@ -1,0 +1,2 @@
+### Get a comment
+GET localhost:3330/api/comment/7 HTTP/1.1

@@ -2,12 +2,11 @@ import { IsIn, IsNumber, IsString, Max, MaxLength, Min, MinLength } from 'class-
 import { ApiProperty } from '@nestjs/swagger';
 
 import { GuitarType, StringNumber } from '@guitar-shop/shared-types';
-import { Prisma } from '@prisma/client';
 import { CodeLength, DescriptionLength, NameLength, Price, ShopItemError } from '../shop-item.constants';
 
 export class CreateShopItemDto {
   @ApiProperty({
-    description: 'Guitar name. Required. Minimum length 10 characters, maximum length 100 characters.',
+    description: 'Guitar name. Minimum length 10 characters, maximum length 100 characters.',
     example: 'Fender Player Stratocaster',
   })
   @IsString()
@@ -21,7 +20,7 @@ export class CreateShopItemDto {
 
 
   @ApiProperty({
-    description: 'Guitar description. Required. The minimum length is 20 characters, the maximum length is 1024 characters.',
+    description: 'Guitar description. The minimum length is 20 characters, the maximum length is 1024 characters.',
     example: 'Weight-relieved mahogany body with maple top. Mahogany neck with asymmetrical profile, rosewood fingerboard with compound radius. Dual Tradbucker pickups with coil split, coil tap and phase controls. Nashville bridge, stopbar tailpiece and locking Grover tuners.',
   })
   @IsString()
@@ -46,7 +45,7 @@ export class CreateShopItemDto {
     description: 'Guitar type. Required. One option from the list: Electric, Acoustic, Ukulele.',
     example: 'Electric',
   })
-  @IsIn(['Electric','Acoustic', 'Ukulele'], {
+  @IsIn(['Electric', 'Acoustic', 'Ukulele'], {
     message: ShopItemError.WRONG_TYPE
   })
   public type: GuitarType;
@@ -88,5 +87,5 @@ export class CreateShopItemDto {
   @Max(Price.MAX, {
     message: ShopItemError.PRICE_TOO_HIGH
   })
-  public price: Prisma.Decimal;
+  public price: number;
 }

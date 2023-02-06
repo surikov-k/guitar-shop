@@ -19,7 +19,7 @@ enum GuitarType {
 
 model User {
   id           Int       @id @default(autoincrement())
-  email        String
+  email        String    @unique
   name         String
   passwordHash String
   isAdmin      Boolean
@@ -35,7 +35,8 @@ model ShopItem {
   type          GuitarType
   code          String
   stringsNumber Int
-  price         Decimal
+  rating        Float  @default(0)
+  price         Float
   comments      Comment[]
 }
 
