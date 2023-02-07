@@ -8,6 +8,8 @@ import { ENV_FILE_PATH } from './app.constants';
 import { validateEnvironment } from './env.validation';
 import { ShopItemModule } from './shop-item/shop-item.module';
 import { ItemCommentModule } from './item-comment/item-comment.module';
+import { ShopOrderModule } from './shop-order/shop-order.module';
+import { OrderItemModule } from './order-item/order-item.module';
 
 @Module({
   imports: [
@@ -22,6 +24,8 @@ import { ItemCommentModule } from './item-comment/item-comment.module';
     ItemCommentModule,
     ShopItemModule,
     ShopUserModule,
+    ShopOrderModule,
+    OrderItemModule,
   ],
   controllers: [],
   providers: [],

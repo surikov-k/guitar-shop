@@ -24,31 +24,54 @@ model User {
   passwordHash String
   isAdmin      Boolean
   comments     Comment[]
+  Order        Order[]
 }
 
 model ShopItem {
-  id            Int       @id @default(autoincrement())
+  id            Int         @id @default(autoincrement())
   name          String
   description   String
-  addedAt       DateTime  @default(now())
+  addedAt       DateTime    @default(now())
   photo         String
   type          GuitarType
   code          String
   stringsNumber Int
-  rating        Float  @default(0)
+  rating        Float       @default(0)
   price         Float
   comments      Comment[]
+  orderItems    OrderItem[]
 }
 
 model Comment {
-  id            Int      @id @default(autoincrement())
-  author        User     @relation(fields: [userId], references: [id])
+  id            Int       @id @default(autoincrement())
+  author        User      @relation(fields: [userId], references: [id])
   advantages    String
   disadvantages String
   text          String
   rating        Int
-  createdAt     DateTime @default(now())
+  createdAt     DateTime  @default(now())
   userId        Int
-  shopItem      ShopItem?  @relation(fields: [shopItemId], references: [id])
+  shopItem      ShopItem? @relation(fields: [shopItemId], references: [id])
   shopItemId    Int?
+}
+
+model OrderItem {
+  id         Int       @id @default(autoincrement())
+  shopItem   ShopItem? @relation(fields: [shopItemId], references: [id])
+  shopItemId Int?
+  quantity   Int
+  price      Float
+  sum        Float
+  Order      Order?    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId    Int?
+}
+
+model Order {
+  id            Int         @id @default(autoincrement())
+  userId        Int
+  User          User        @relation(fields: [userId], references: [id])
+  orderItems    OrderItem[]
+  totalPrice    Float       @default(0)
+  totalQuantity Int         @default(0)
+  createdAt     DateTime    @default(now())
 }

@@ -1,0 +1,32 @@
+### Get all orders
+GET localhost:3330/api/order?limit=1&page=2 HTTP/1.1
+
+### Get filtered orders
+GET localhost:3330/api/order?date=2023-02-05&price=100 HTTP/1.1
+
+### Get an order
+GET localhost:3330/api/order/7
+
+### Create an order
+POST localhost:3330/api/order HTTP/1.1
+Content-Type: application/json
+
+{
+  "orderItems": [
+    {
+      "shopItemId": 1,
+      "quantity": 2
+    },
+    {
+      "shopItemId": 3,
+      "quantity": 1
+    },
+    {
+      "shopItemId": 2,
+      "quantity": 10
+    }
+  ]
+}
+
+###Delete an order
+DELETE localhost:3330/api/order/9
