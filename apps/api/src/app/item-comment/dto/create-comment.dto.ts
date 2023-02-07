@@ -4,7 +4,9 @@ import { AdvantageLength, CommentError, DisadvantageLength, Rating, TextLength }
 
 export class CreateCommentDto {
   @ApiProperty({
-    description: 'The shop item advantages. Minimum length 50 characters, maximum length 100 characters',
+    description: 'Shop item advantages',
+    minimum: 50,
+    maximum: 100,
     example: 'Good feel, fun to play, good tone, solid electronics, good pick up',
   })
   @MinLength(AdvantageLength.MIN, {
@@ -18,7 +20,9 @@ export class CreateCommentDto {
 
 
   @ApiProperty({
-    description: 'The shop item advantages. Minimum length 50 characters, maximum length 100 characters',
+    description: 'Shop item disadvantages',
+    minimum: 50,
+    maximum: 100,
     example: 'Fret buzz, flat sound, no pick, no dip switch sticker, and nut is off, poor fitting knob',
   })
   @MinLength(DisadvantageLength.MIN, {
@@ -32,7 +36,9 @@ export class CreateCommentDto {
 
 
   @ApiProperty({
-    description: 'Comment text. The minimum length is 5 characters, the maximum length is 1024 characters.',
+    description: 'Comment text',
+    minimum: 5,
+    maximum: 1024,
     example: 'So in the 30 years I have been playing I have owned 5 Les Pauls and have played more than can be counted. I have always had love hate relationship with Les Pauls. I love the look, love the sound. However, I always hated the necks, too thick and sticky. Also they are incredibly heavy.',
   })
   @MinLength(TextLength.MIN, {
@@ -47,6 +53,8 @@ export class CreateCommentDto {
 
   @ApiProperty({
     description: 'The shop item rating. A number from 1 to 5',
+    minimum: 1,
+    maximum: 5,
     example: 4,
   })
   @Min(Rating.MIN, {

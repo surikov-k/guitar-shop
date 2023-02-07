@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Query } from '@nestjs/common';
-import { ApiResponse } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { fillObject } from '@guitar-shop/core';
 import { ShopOrderService } from './shop-order.service';
@@ -7,6 +7,7 @@ import { CreateOrderDto } from './dto';
 import { OrderRdo } from './rdo/order.rdo';
 import { OrderQuery } from './query';
 
+@ApiTags('order')
 @Controller('order')
 export class ShopOrderController {
   constructor(private readonly orderService: ShopOrderService) {}

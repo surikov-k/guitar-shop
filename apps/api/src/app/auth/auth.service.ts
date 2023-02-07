@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { ShopUserRepository } from '../shop-user/shop-user.repository';
 import { LoginDto, RegisterDto } from './dto';
 import { ShopUserEntity } from '../shop-user/shop-user.entity';
@@ -10,22 +10,16 @@ export class AuthService {
   constructor(private readonly shopUserRepository: ShopUserRepository) {}
 
   async register(dto: RegisterDto) {
-    const {email, name, password} = dto;
+    const { email, name, password } = dto;
     const userData = { email, name, isAdmin: false, passwordHash: '' };
 
-    const existedUser = await this.shopUserRepository.findByEmail(email);
-
-    if (existedUser) {
-      throw new BadRequestException(AuthError.ALREADY_EXISTS)
-    }
-
-    const userEntity = await new ShopUserEntity(userData ).setPassword(password);
+    const userEntity = await new ShopUserEntity(userData).setPassword(password);
     return this.shopUserRepository.create(userEntity)
   }
 
   async verify(dto: LoginDto) {
-    const {email, password} = dto;
-    const user = await  this.shopUserRepository.findByEmail(email);
+    const { email, password } = dto;
+    const user = await this.shopUserRepository.findByEmail(email);
 
     if (!user) {
       throw new UnauthorizedException(AuthError.WRONG_CREDENTIALS);
@@ -41,7 +35,7 @@ export class AuthService {
   }
 
   async get(id) {
-    const user =  await this.shopUserRepository.findById(id)
+    const user = await this.shopUserRepository.findById(id)
     if (!user) {
       throw new NotFoundException(AuthError.NOT_FOUND);
     }

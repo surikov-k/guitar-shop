@@ -1,9 +1,3 @@
-// export enum GuitarType {
-//   'Electric' = 'Electric',
-//   'Acoustic' = 'Acoustic',
-//   'Ukulele' = 'Ukulele'
-// }
-
 export const GuitarType: {
   Electric: 'Electric',
   Acoustic: 'Acoustic',

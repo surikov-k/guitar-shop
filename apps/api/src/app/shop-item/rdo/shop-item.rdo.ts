@@ -1,6 +1,4 @@
 import { Expose, Transform, Type } from 'class-transformer';
-
-import { Prisma } from '@prisma/client';
 import { GuitarType, StringNumber } from '@guitar-shop/shared-types';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -75,7 +73,7 @@ export class ShopItemRdo {
   })
   @Expose()
   @Type(() => Number)
-  public price: Prisma.Decimal;
+  public price: number;
 
 
   @ApiProperty({

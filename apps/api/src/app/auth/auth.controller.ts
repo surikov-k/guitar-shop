@@ -16,7 +16,8 @@ export class AuthController {
     status: HttpStatus.CREATED,
     description: 'A new user has been successfully created.'
   })
-  public async register(@Body() dto: RegisterDto) {
+  @HttpCode(HttpStatus.CREATED)
+  async register(@Body() dto: RegisterDto) {
     const user = await this.authService.register(dto);
     return fillObject(UserRdo, user);
   }
