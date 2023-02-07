@@ -5,7 +5,7 @@ GET localhost:3330/api/item?sort=rating HTTP/1.1
 GET localhost:3330/api/item?sort=price&direction=asc&type=electric&strings=6&limit=2&page=2 HTTP/1.1
 
 ### Get a shop item
-GET localhost:3330/api/item/3 HTTP/1.1
+GET localhost:3330/api/item/2 HTTP/1.1
 
 ### Create a new shop item
 POST localhost:3330/api/item HTTP/1.1
@@ -14,11 +14,11 @@ Content-Type: application/json
 {
   "name": "Gibson Les Paul Traditional Pro V",
   "description": "The Gibson Trad Pro V electric guitar shares the same DNA as a Les Paul—mahogany body and neck, carved maple top—but it's also a completely evolved instrument. You'll feel it first: The body is weight-relieved, making it super comfortable to sling on the shoulder. The neck has an asymmetrical shape that fits like a glove. Thanks to the compound radius rosewood fretboard, you'll find it easier to solo in higher registers. And that's where you'll hear the difference, too.",
-  "photo":  "gibson-1.jpg",
+  "photo": "gibson-1.jpg",
   "type": "Electric",
-  "code":  "1500000000287968",
+  "code": "1500000000287968",
   "stringsNumber": 6,
-  "price":  2399
+  "price": 2399
 }
 
 ### Update a shop item
@@ -31,7 +31,7 @@ Content-Type: application/json
 }
 
 ### Create a comment for the shop item
-POST localhost:3330/api/item/1/comments HTTP/1.1
+POST localhost:3330/api/item/4/comments HTTP/1.1
 Content-Type: application/json
 
 {

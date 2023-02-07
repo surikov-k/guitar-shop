@@ -8,6 +8,7 @@ import { CreateShopItemDto, UpdateShopItemDto } from './dto';
 import { ShopItemQuery } from './query';
 import { CommentRdo } from '../item-comment/rdo';
 import { CreateCommentDto } from '../item-comment/dto';
+import { ShopItemIdValidationPipe } from '../common/pipes';
 
 @ApiTags('shop-item')
 @Controller('item')
@@ -31,7 +32,7 @@ export class ShopItemController {
     status: HttpStatus.OK,
     description: 'The shop item is found',
   })
-  public async get(@Param('id') id: number) {
+  public async get(@Param('id', ShopItemIdValidationPipe) id: number) {
     const item = await this.shopItemService.get(id);
     return fillObject(ShopItemRdo, item)
   }
@@ -44,7 +45,7 @@ export class ShopItemController {
   })
   @HttpCode(HttpStatus.CREATED)
   public async createComment(
-    @Param('id') shopItemId: number,
+    @Param('id', ShopItemIdValidationPipe) shopItemId: number,
     @Body() dto: CreateCommentDto) {
     const userId = 1;
     const comment = this.shopItemService.createComment(userId, shopItemId, dto);
@@ -62,7 +63,7 @@ export class ShopItemController {
     status: HttpStatus.NOT_FOUND,
     description: 'Comment is not found',
   })
-  public async getComments(@Param('id') id: number) {
+  public async getComments(@Param('id', ShopItemIdValidationPipe) id: number) {
     const comments = await this.shopItemService.getComments(id);
     return comments.map((comment) => fillObject(CommentRdo, comment));
   }
@@ -86,7 +87,7 @@ export class ShopItemController {
     description: 'Shop item is updated',
   })
   public async update(
-    @Param('id') id: number,
+    @Param('id', ShopItemIdValidationPipe) id: number,
     @Body() dto: UpdateShopItemDto
   ) {
     const item = await this.shopItemService.update(id, dto);
@@ -99,7 +100,7 @@ export class ShopItemController {
     description: 'Shop item is deleted',
   })
   @HttpCode(HttpStatus.NO_CONTENT)
-  public async delete(@Param('id') id: number) {
+  public async delete(@Param('id', ShopItemIdValidationPipe) id: number) {
     return this.shopItemService.delete(id);
   }
 }

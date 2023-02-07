@@ -6,6 +6,7 @@ import { ShopOrderService } from './shop-order.service';
 import { CreateOrderDto } from './dto';
 import { OrderRdo } from './rdo/order.rdo';
 import { OrderQuery } from './query';
+import { OrderIdValidationPipe } from '../common/pipes/order-id-validation.pipe';
 
 @ApiTags('order')
 @Controller('order')
@@ -47,7 +48,7 @@ export class ShopOrderController {
     status: HttpStatus.NOT_FOUND,
     description: 'The order wasn\'t found',
   })
-  public async get(@Param('id') id: number) {
+  public async get(@Param('id', OrderIdValidationPipe) id: number) {
     const order = await this.orderService.get(id);
     return fillObject(OrderRdo, order);
   }
@@ -59,7 +60,7 @@ export class ShopOrderController {
     status: HttpStatus.NO_CONTENT,
     description: 'The order was deleted',
   })
-  public async delete(@Param('id') id: number) {
+  public async delete(@Param('id', OrderIdValidationPipe) id: number) {
     await this.orderService.delete(id);
   }
 }

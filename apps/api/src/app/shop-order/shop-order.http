@@ -29,4 +29,4 @@ Content-Type: application/json
 }
 
 ###Delete an order
-DELETE localhost:3330/api/order/9
+DELETE localhost:3330/api/order/99
