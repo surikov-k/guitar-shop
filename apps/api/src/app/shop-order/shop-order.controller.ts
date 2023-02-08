@@ -8,6 +8,7 @@ import {
   Param,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
@@ -16,7 +17,9 @@ import { ShopOrderService } from './shop-order.service';
 import { CreateOrderDto } from './dto';
 import { OrderRdo } from './rdo/order.rdo';
 import { OrderQuery } from './query';
-import { OrderIdValidationPipe } from '../common/pipes/order-id-validation.pipe';
+import { AdminGuard, JwtAuthGuard } from '../../common/guards';
+import { OrderIdValidationPipe } from '../../common/pipes/order-id-validation.pipe';
+import { GetCurrentUserId } from '../../common/decorators';
 
 @ApiTags('order')
 @Controller('order')
@@ -24,18 +27,22 @@ export class ShopOrderController {
   constructor(private readonly orderService: ShopOrderService) {}
 
   @Post()
+  @UseGuards(JwtAuthGuard)
   @ApiResponse({
     type: OrderRdo,
     status: HttpStatus.CREATED,
     description: 'The order was created',
   })
-  public async create(@Body() dto: CreateOrderDto) {
-    const userId = 1;
+  public async create(
+    @Body() dto: CreateOrderDto,
+    @GetCurrentUserId() userId: number
+  ) {
     const order = await this.orderService.create(userId, dto);
     return fillObject(OrderRdo, order);
   }
 
   @Get()
+  @UseGuards(AdminGuard)
   @ApiResponse({
     type: [OrderRdo],
     status: HttpStatus.OK,
@@ -47,6 +54,7 @@ export class ShopOrderController {
   }
 
   @Get('/:id')
+  @UseGuards(AdminGuard)
   @ApiResponse({
     type: OrderRdo,
     status: HttpStatus.OK,
@@ -62,6 +70,7 @@ export class ShopOrderController {
   }
 
   @Delete('/:id')
+  @UseGuards(AdminGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiResponse({
     status: HttpStatus.NO_CONTENT,

@@ -1,7 +1,7 @@
 import { IsNumber, Min } from 'class-validator';
-import { DoesShopItemExist } from '../../common/validators';
 import { OrderItemError } from '../order-item.constants';
 import { ApiProperty } from '@nestjs/swagger';
+import { DoesShopItemExist } from '../../../common/validators';
 
 export class CreateOrderItemDto {
   @ApiProperty({
@@ -9,11 +9,10 @@ export class CreateOrderItemDto {
     example: '12',
   })
   @DoesShopItemExist({
-    message: OrderItemError.WRONG_SHOP_ITEM
+    message: OrderItemError.WRONG_SHOP_ITEM,
   })
   @IsNumber()
-  shopItemId: number
-
+  shopItemId: number;
 
   @ApiProperty({
     description: 'Quantity',
@@ -21,7 +20,7 @@ export class CreateOrderItemDto {
   })
   @IsNumber()
   @Min(1, {
-    message: OrderItemError.INCORRECT_QUANTITY
+    message: OrderItemError.INCORRECT_QUANTITY,
   })
-  quantity: number
+  quantity: number;
 }

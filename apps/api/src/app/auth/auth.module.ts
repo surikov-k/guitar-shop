@@ -6,9 +6,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { ShopUserModule } from '../shop-user/shop-user.module';
-import { IsEmailUniqueConstraint } from '../common/validators';
 import { getJwtConfig } from '../../config';
-import { JwtStrategy } from '../common/strategies';
+import { AccessTokenStrategy } from '../../common/strategies';
+import { IsEmailUniqueConstraint } from '../../common/validators';
 
 @Module({
   imports: [
@@ -21,6 +21,6 @@ import { JwtStrategy } from '../common/strategies';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, IsEmailUniqueConstraint, JwtStrategy],
+  providers: [AuthService, IsEmailUniqueConstraint, AccessTokenStrategy],
 })
 export class AuthModule {}

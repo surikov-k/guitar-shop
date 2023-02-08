@@ -2,10 +2,10 @@ import {
   registerDecorator,
   ValidationOptions,
   ValidatorConstraint,
-  ValidatorConstraintInterface
+  ValidatorConstraintInterface,
 } from 'class-validator';
 import { Injectable } from '@nestjs/common';
-import { ShopUserRepository } from '../../shop-user/shop-user.repository';
+import { ShopUserRepository } from '../../app/shop-user/shop-user.repository';
 
 @ValidatorConstraint({ async: true })
 @Injectable()
@@ -27,5 +27,5 @@ export function IsEmailUnique(validationOptions?: ValidationOptions) {
       constraints: [],
       validator: IsEmailUniqueConstraint,
     });
-  }
+  };
 }

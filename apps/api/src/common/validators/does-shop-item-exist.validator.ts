@@ -2,15 +2,16 @@ import {
   registerDecorator,
   ValidationOptions,
   ValidatorConstraint,
-  ValidatorConstraintInterface
+  ValidatorConstraintInterface,
 } from 'class-validator';
 import { Injectable } from '@nestjs/common';
-
-import { ShopItemRepository } from '../../shop-item/shop-item.repository';
+import { ShopItemRepository } from '../../app/shop-item/shop-item.repository';
 
 @ValidatorConstraint({ async: true })
 @Injectable()
-export class DoesShopItemExistConstraint implements ValidatorConstraintInterface {
+export class DoesShopItemExistConstraint
+  implements ValidatorConstraintInterface
+{
   constructor(private readonly shopItemRepository: ShopItemRepository) {}
 
   async validate(shopItemId: number): Promise<boolean> {
@@ -28,5 +29,5 @@ export function DoesShopItemExist(validationOptions?: ValidationOptions) {
       constraints: [],
       validator: DoesShopItemExistConstraint,
     });
-  }
+  };
 }

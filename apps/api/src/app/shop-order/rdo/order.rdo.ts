@@ -10,6 +10,12 @@ export class OrderRdo {
   @Expose()
   id: number;
 
+  @ApiProperty({
+    description: 'User ID',
+    example: '1',
+  })
+  @Expose()
+  userId: number;
 
   @ApiProperty({
     description: 'Order item',
@@ -19,7 +25,6 @@ export class OrderRdo {
   @Type(() => OrderItemRdo)
   orderItems: OrderItemRdo[];
 
-
   @ApiProperty({
     description: 'Total order price',
     example: '1000',
@@ -27,14 +32,12 @@ export class OrderRdo {
   @Expose()
   totalPrice: number;
 
-
   @ApiProperty({
     description: 'Total items in the order',
     example: '5',
   })
   @Expose()
   totalQuantity: number;
-
 
   @ApiProperty({
     description: 'Order creation date',

@@ -1,20 +1,27 @@
-### Get all orders
+### Get all orders — admin
 GET localhost:3330/api/order?limit=1&page=2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImVtYWlsIjoiYWJieS5tb250Z29tZXJ5QGV4YW1wbGUuY29tIiwibmFtZSI6IlpvaWxhIERpY2tpIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjc1ODYwNTE4LCJleHAiOjE2NzU4NjE0MTh9.rQAGKosTRveoI7uY8yhlxfBT1nm_ga2FhPk_5TEiftQ
 
-### Get filtered orders
+
+### Get filtered orders — admin
 GET localhost:3330/api/order?date=2023-02-05&price=100 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImVtYWlsIjoiYWJieS5tb250Z29tZXJ5QGV4YW1wbGUuY29tIiwibmFtZSI6IlpvaWxhIERpY2tpIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjc1ODYwNTE4LCJleHAiOjE2NzU4NjE0MTh9.rQAGKosTRveoI7uY8yhlxfBT1nm_ga2FhPk_5TEiftQ
 
-### Get an order
+
+### Get an order — admin
 GET localhost:3330/api/order/7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImVtYWlsIjoiYWJieS5tb250Z29tZXJ5QGV4YW1wbGUuY29tIiwibmFtZSI6IlpvaWxhIERpY2tpIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjc1ODYwNTE4LCJleHAiOjE2NzU4NjE0MTh9.rQAGKosTRveoI7uY8yhlxfBT1nm_ga2FhPk_5TEiftQ
 
-### Create an order
+
+### Create an order — auth user
 POST localhost:3330/api/order HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoid2hpdG5leS5tb3NzQGV4YW1wbGUuY29tIiwibmFtZSI6IlRlbmEgSGVhdGhjb3RlIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTY3NTg3NDY0OSwiZXhwIjoxNjc1ODc1NTQ5fQ.tveElhf7jUf3wN9438CWf7yS8PtjRW9Y0_36ZnfuAPg
 
 {
   "orderItems": [
     {
-      "shopItemId": 1,
+      "shopItemId": 4,
       "quantity": 2
     },
     {
@@ -22,11 +29,13 @@ Content-Type: application/json
       "quantity": 1
     },
     {
-      "shopItemId": 2,
+      "shopItemId": 5,
       "quantity": 10
     }
   ]
 }
 
-###Delete an order
-DELETE localhost:3330/api/order/99
+
+###Delete an order — admin
+DELETE localhost:3330/api/order/7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImVtYWlsIjoiYWJieS5tb250Z29tZXJ5QGV4YW1wbGUuY29tIiwibmFtZSI6IlpvaWxhIERpY2tpIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjc1ODYwNTE4LCJleHAiOjE2NzU4NjE0MTh9.rQAGKosTRveoI7uY8yhlxfBT1nm_ga2FhPk_5TEiftQ

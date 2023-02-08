@@ -1,4 +1,16 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Patch,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { fillObject } from '@guitar-shop/core';
@@ -8,7 +20,9 @@ import { CreateShopItemDto, UpdateShopItemDto } from './dto';
 import { ShopItemQuery } from './query';
 import { CommentRdo } from '../item-comment/rdo';
 import { CreateCommentDto } from '../item-comment/dto';
-import { ShopItemIdValidationPipe } from '../common/pipes';
+import { ShopItemIdValidationPipe } from '../../common/pipes';
+import { AdminGuard, JwtAuthGuard } from '../../common/guards';
+import { GetCurrentUserId } from '../../common/decorators';
 
 @ApiTags('shop-item')
 @Controller('item')
@@ -34,10 +48,11 @@ export class ShopItemController {
   })
   public async get(@Param('id', ShopItemIdValidationPipe) id: number) {
     const item = await this.shopItemService.get(id);
-    return fillObject(ShopItemRdo, item)
+    return fillObject(ShopItemRdo, item);
   }
 
   @Post('/:id/comments')
+  @UseGuards(JwtAuthGuard)
   @ApiResponse({
     type: CommentRdo,
     status: HttpStatus.CREATED,
@@ -46,8 +61,9 @@ export class ShopItemController {
   @HttpCode(HttpStatus.CREATED)
   public async createComment(
     @Param('id', ShopItemIdValidationPipe) shopItemId: number,
-    @Body() dto: CreateCommentDto) {
-    const userId = 1;
+    @Body() dto: CreateCommentDto,
+    @GetCurrentUserId() userId: number
+  ) {
     const comment = this.shopItemService.createComment(userId, shopItemId, dto);
 
     return fillObject(CommentRdo, comment);
@@ -69,19 +85,19 @@ export class ShopItemController {
   }
 
   @Post()
+  @UseGuards(AdminGuard)
   @ApiResponse({
     type: ShopItemRdo,
     status: HttpStatus.CREATED,
     description: 'Shop item is created',
   })
-  public async create(
-    @Body() dto: CreateShopItemDto,
-  ) {
+  public async create(@Body() dto: CreateShopItemDto) {
     const item = await this.shopItemService.create(dto);
     return fillObject(ShopItemRdo, item);
   }
 
   @Patch('/:id')
+  @UseGuards(AdminGuard)
   @ApiResponse({
     type: ShopItemRdo,
     description: 'Shop item is updated',
@@ -95,6 +111,7 @@ export class ShopItemController {
   }
 
   @Delete('/:id')
+  @UseGuards(AdminGuard)
   @ApiResponse({
     status: HttpStatus.NO_CONTENT,
     description: 'Shop item is deleted',

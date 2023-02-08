@@ -1,4 +1,12 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { AuthService } from './auth.service';
@@ -14,7 +22,7 @@ export class AuthController {
   @Post('register')
   @ApiResponse({
     status: HttpStatus.CREATED,
-    description: 'A new user has been successfully created.'
+    description: 'A new user has been successfully created.',
   })
   @HttpCode(HttpStatus.CREATED)
   async register(@Body() dto: RegisterDto) {
@@ -26,7 +34,7 @@ export class AuthController {
   @ApiResponse({
     status: HttpStatus.OK,
     type: LoggedRdo,
-    description: 'The user has been successfully logged in'
+    description: 'The user has been successfully logged in',
   })
   @ApiResponse({
     status: HttpStatus.UNAUTHORIZED,
@@ -34,15 +42,15 @@ export class AuthController {
   })
   public async login(@Body() dto: LoginDto) {
     const user = await this.authService.verify(dto);
-    const loggedUser = await this.authService.login(user)
-    return fillObject(LoggedRdo, loggedUser);
+    const { accessToken } = await this.authService.login(user);
+    return fillObject(LoggedRdo, { ...user, accessToken });
   }
 
   @Get(':id')
   @ApiResponse({
     type: UserRdo,
     status: HttpStatus.OK,
-    description: 'User is found'
+    description: 'User is found',
   })
   async get(@Param('id') id: string) {
     const user = await this.authService.get(parseInt(id, 10));

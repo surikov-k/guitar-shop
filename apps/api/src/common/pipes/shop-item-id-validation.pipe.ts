@@ -1,6 +1,10 @@
-import { ArgumentMetadata, Injectable, NotFoundException, PipeTransform } from '@nestjs/common';
-
-import { ShopItemRepository } from '../../shop-item/shop-item.repository';
+import {
+  ArgumentMetadata,
+  Injectable,
+  NotFoundException,
+  PipeTransform,
+} from '@nestjs/common';
+import { ShopItemRepository } from '../../app/shop-item/shop-item.repository';
 
 const SHOP_ITEM_NOT_FOUND = 'Shop item not found';
 
@@ -10,14 +14,13 @@ export class ShopItemIdValidationPipe implements PipeTransform {
 
   async transform(value: number, { type }: ArgumentMetadata) {
     if (type !== 'param') {
-      throw new Error('This pipe must be used only with params!')
+      throw new Error('This pipe must be used only with params!');
     }
-    const item = await this.shopItemRepository.findById(value)
+    const item = await this.shopItemRepository.findById(value);
 
     if (!item) {
       throw new NotFoundException(SHOP_ITEM_NOT_FOUND);
     }
     return value;
   }
-
 }

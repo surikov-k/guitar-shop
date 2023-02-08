@@ -8,7 +8,7 @@ Content-Type: application/json
   "password": "123456"
 }
 
-### Login a user
+### Login as a user
 POST localhost:3330/api/auth/login HTTP/1.1
 Content-Type: application/json
 
@@ -17,5 +17,14 @@ Content-Type: application/json
   "password": "123456"
 }
 
+### Login as an admin
+POST localhost:3330/api/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "abby.montgomery@example.com",
+  "password": "123456"
+}
+
 ### Get a user
-GET localhost:3330/api/auth/133 HTTP/1.1
+GET localhost:3330/api/auth/3 HTTP/1.1
