@@ -1,4 +1,14 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { fillObject } from '@guitar-shop/core';
@@ -25,7 +35,6 @@ export class ShopOrderController {
     return fillObject(OrderRdo, order);
   }
 
-
   @Get()
   @ApiResponse({
     type: [OrderRdo],
@@ -37,7 +46,6 @@ export class ShopOrderController {
     return orders.map((order) => fillObject(OrderRdo, order));
   }
 
-
   @Get('/:id')
   @ApiResponse({
     type: OrderRdo,
@@ -46,13 +54,12 @@ export class ShopOrderController {
   })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
-    description: 'The order wasn\'t found',
+    description: "The order wasn't found",
   })
   public async get(@Param('id', OrderIdValidationPipe) id: number) {
     const order = await this.orderService.get(id);
     return fillObject(OrderRdo, order);
   }
-
 
   @Delete('/:id')
   @HttpCode(HttpStatus.NO_CONTENT)

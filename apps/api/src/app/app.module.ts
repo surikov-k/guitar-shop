@@ -10,6 +10,7 @@ import { ShopItemModule } from './shop-item/shop-item.module';
 import { ItemCommentModule } from './item-comment/item-comment.module';
 import { ShopOrderModule } from './shop-order/shop-order.module';
 import { OrderItemModule } from './order-item/order-item.module';
+import { jwtOptions } from '../config';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { OrderItemModule } from './order-item/order-item.module';
       cache: true,
       envFilePath: ENV_FILE_PATH,
       isGlobal: true,
+      load: [jwtOptions],
       validate: validateEnvironment,
     }),
     PrismaModule,
