@@ -18,4 +18,4 @@ Content-Type: application/json
 }
 
 ### Get a user
-GET localhost:3330/api/auth/1 HTTP/1.1
+GET localhost:3330/api/auth/133 HTTP/1.1
