@@ -1,5 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { ServeStaticModule } from '@nestjs/serve-static';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import * as path from 'path';
 
 import { ShopUserModule } from './shop-user/shop-user.module';
 import { AuthModule } from './auth/auth.module';
@@ -16,6 +19,10 @@ import { ShopFileModule } from './shop-file/shop-file.module';
 @Module({
   imports: [
     AuthModule,
+    ServeStaticModule.forRoot({
+      rootPath: path.join(__dirname, '..', '../../uploads'),
+      serveRoot: '/uploads/',
+    }),
     ConfigModule.forRoot({
       cache: true,
       envFilePath: ENV_FILE_PATH,

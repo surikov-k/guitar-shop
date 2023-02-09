@@ -12,4 +12,4 @@ Content-Type: image/jpeg
 
 
 ### Get a file
-GET http://localhost:3330/api/file/1675889107074.hill.jpg
+GET http://localhost:3330/uploads/1675889107074.hill.jpg
