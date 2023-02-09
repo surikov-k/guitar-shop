@@ -25,6 +25,7 @@ model User {
   isAdmin      Boolean
   comments     Comment[]
   Order        Order[]
+  File         File[]
 }
 
 model ShopItem {
@@ -32,7 +33,7 @@ model ShopItem {
   name          String
   description   String
   addedAt       DateTime    @default(now())
-  photo         String
+  photo         File?
   type          GuitarType
   code          String
   stringsNumber Int
@@ -74,4 +75,13 @@ model Order {
   totalPrice    Float       @default(0)
   totalQuantity Int         @default(0)
   createdAt     DateTime    @default(now())
+}
+
+model File {
+  id         Int      @id @default(autoincrement())
+  shopItemId Int      @unique
+  filename   String
+  userId     Int
+  User       User     @relation(fields: [userId], references: [id])
+  shopItem   ShopItem @relation(fields: [shopItemId], references: [id], onDelete: Cascade)
 }

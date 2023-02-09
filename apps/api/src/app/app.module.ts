@@ -11,6 +11,7 @@ import { ItemCommentModule } from './item-comment/item-comment.module';
 import { ShopOrderModule } from './shop-order/shop-order.module';
 import { OrderItemModule } from './order-item/order-item.module';
 import { jwtOptions } from '../config';
+import { ShopFileModule } from './shop-file/shop-file.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { jwtOptions } from '../config';
     ShopUserModule,
     ShopOrderModule,
     OrderItemModule,
+    ShopFileModule,
   ],
   controllers: [],
   providers: [],

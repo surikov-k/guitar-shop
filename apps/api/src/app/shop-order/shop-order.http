@@ -36,6 +36,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsI
 }
 
 
-###Delete an order — admin
+### Delete an order — admin
 DELETE localhost:3330/api/order/7
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImVtYWlsIjoiYWJieS5tb250Z29tZXJ5QGV4YW1wbGUuY29tIiwibmFtZSI6IlpvaWxhIERpY2tpIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjc1ODYwNTE4LCJleHAiOjE2NzU4NjE0MTh9.rQAGKosTRveoI7uY8yhlxfBT1nm_ga2FhPk_5TEiftQ

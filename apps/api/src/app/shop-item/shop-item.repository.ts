@@ -7,7 +7,9 @@ import { PrismaService } from '../prisma/prisma.service';
 import { ShopItemQuery } from './query';
 
 @Injectable()
-export class ShopItemRepository implements CrudRepository<ShopItemEntity, number, Guitar> {
+export class ShopItemRepository
+  implements CrudRepository<ShopItemEntity, number, Guitar>
+{
   constructor(private readonly prisma: PrismaService) {}
 
   public async create(item: ShopItemEntity): Promise<Guitar> {
@@ -16,17 +18,18 @@ export class ShopItemRepository implements CrudRepository<ShopItemEntity, number
       data: {
         ...entityData,
         comments: {
-          connect: []
-        }
+          connect: [],
+        },
       },
       include: {
         comments: true,
-      }
+        photo: true,
+      },
     });
   }
 
   public async destroy(id: number): Promise<void> {
-    await this.prisma.shopItem.delete({ where: { id } })
+    await this.prisma.shopItem.delete({ where: { id } });
   }
 
   public async findById(id: number): Promise<Guitar | null> {
@@ -34,21 +37,22 @@ export class ShopItemRepository implements CrudRepository<ShopItemEntity, number
       where: { id },
       include: {
         comments: true,
-      }
-    })
+        photo: true,
+      },
+    });
   }
 
   public async find(query: ShopItemQuery): Promise<Guitar[]> {
-    const {limit,  type, strings, sort, direction, page } = query;
+    const { limit, type, strings, sort, direction, page } = query;
 
-    const getSortOption = (type: ShopItemQuery["sort"]) => {
-      const sortOption  = {
+    const getSortOption = (type: ShopItemQuery['sort']) => {
+      const sortOption = {
         price: { price: direction },
         added: { addedAt: direction },
-        rating: {rating: direction}
-      }
+        rating: { rating: direction },
+      };
       return sortOption[type];
-    }
+    };
 
     return this.prisma.shopItem.findMany({
       take: limit,
@@ -58,28 +62,31 @@ export class ShopItemRepository implements CrudRepository<ShopItemEntity, number
       },
       include: {
         comments: true,
+        photo: true,
       },
-      orderBy: [
-        getSortOption(sort)
-      ],
+      orderBy: [getSortOption(sort)],
       skip: page > 0 ? limit * (page - 1) : undefined,
     });
   }
 
   public async update(id: number, item: ShopItemEntity): Promise<Guitar> {
     const entityData = item.toObject();
+    const { photo } = entityData;
     return this.prisma.shopItem.update({
       where: { id },
       data: {
         ...entityData,
         comments: {
-          connect: [...entityData.comments]
-        }
+          connect: [...entityData.comments],
+        },
+        photo: {
+          connect: photo ? { id: photo.id } : entityData.photo,
+        },
       },
       include: {
-        comments: true
-      }
-    })
+        comments: true,
+        photo: true,
+      },
+    });
   }
-
 }

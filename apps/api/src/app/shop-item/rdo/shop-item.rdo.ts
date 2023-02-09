@@ -10,7 +10,6 @@ export class ShopItemRdo {
   @Expose()
   public id: number;
 
-
   @ApiProperty({
     description: 'Guitar name',
     example: 'Fender Player Stratocaster',
@@ -18,14 +17,13 @@ export class ShopItemRdo {
   @Expose()
   public name: string;
 
-
   @ApiProperty({
     description: 'Guitar description',
-    example: 'Weight-relieved mahogany body with maple top. Mahogany neck with asymmetrical profile, rosewood fingerboard with compound radius. Dual Tradbucker pickups with coil split, coil tap and phase controls. Nashville bridge, stopbar tailpiece and locking Grover tuners.',
+    example:
+      'Weight-relieved mahogany body with maple top. Mahogany neck with asymmetrical profile, rosewood fingerboard with compound radius. Dual Tradbucker pickups with coil split, coil tap and phase controls. Nashville bridge, stopbar tailpiece and locking Grover tuners.',
   })
   @Expose()
   public description: string;
-
 
   @ApiProperty({
     description: 'The date the guitar was added',
@@ -34,14 +32,13 @@ export class ShopItemRdo {
   @Expose()
   public addedAt: string;
 
-
   @ApiProperty({
-    description: 'Guitar photo',
-    example: 'fender.jpg',
+    description: 'Guitar photos ids',
+    example: [1],
   })
   @Expose()
+  @Transform(({ value }) => value?.filename)
   public photo: string;
-
 
   @ApiProperty({
     description: 'Guitar type',
@@ -50,7 +47,6 @@ export class ShopItemRdo {
   @Expose()
   public type: GuitarType;
 
-
   @ApiProperty({
     description: 'Vendor code',
     example: '1500000000287968',
@@ -58,14 +54,12 @@ export class ShopItemRdo {
   @Expose()
   public code: string;
 
-
   @ApiProperty({
     description: 'The number of strings',
     example: 6,
   })
   @Expose()
   public stringsNumber: StringNumber;
-
 
   @ApiProperty({
     description: 'Guitar price',
@@ -75,7 +69,6 @@ export class ShopItemRdo {
   @Type(() => Number)
   public price: number;
 
-
   @ApiProperty({
     description: 'Comments IDs',
     example: 2399,
@@ -84,12 +77,10 @@ export class ShopItemRdo {
   @Transform(({ value }) => value.map(({ id }) => id))
   public comments: number[];
 
-
   @ApiProperty({
     description: 'Guitar rating',
     example: 4,
   })
   @Expose()
-  @Transform(({ value }) => Number(value))
   public rating: number;
 }

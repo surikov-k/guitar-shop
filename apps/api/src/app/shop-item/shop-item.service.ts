@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+
 import { Guitar } from '@guitar-shop/shared-types';
 import { ShopItemRepository } from './shop-item.repository';
 import { ShopItemEntity } from './shop-item.entity';
@@ -19,7 +20,7 @@ export class ShopItemService {
     const entity = new ShopItemEntity({
       ...dto,
       comments: [],
-      rating: 0
+      rating: 0,
     });
     return this.shopItemRepository.create(entity);
   }
@@ -36,14 +37,18 @@ export class ShopItemService {
   }
 
   async getAll(query: ShopItemQuery): Promise<Guitar[]> {
-    return this.shopItemRepository.find(query)
+    return this.shopItemRepository.find(query);
   }
 
   async getComments(id: number) {
     return this.commentRepository.findByItemId(id);
   }
 
-  public async createComment(userId: number, shopItemId: number, dto: CreateCommentDto) {
+  public async createComment(
+    userId: number,
+    shopItemId: number,
+    dto: CreateCommentDto
+  ) {
     const entity = new ItemCommentEntity({ userId, shopItemId, ...dto });
     const comment = await this.commentRepository.create(entity);
     const rating = await this.calculateRating(shopItemId);
@@ -54,16 +59,20 @@ export class ShopItemService {
   async calculateRating(id): Promise<number> {
     const comments = await this.getComments(id);
     if (comments.length) {
-      return comments.reduce((total: number, { rating }) => total + rating, 0) / comments.length;
+      return (
+        comments.reduce((total: number, { rating }) => total + rating, 0) /
+        comments.length
+      );
     }
   }
 
   async update(id: number, dto: UpdateShopItemDto): Promise<Guitar> {
     const item = await this.shopItemRepository.findById(id);
+
     const entity = new ShopItemEntity({
       ...item,
       ...dto,
-    })
+    });
 
     return this.shopItemRepository.update(id, entity);
   }

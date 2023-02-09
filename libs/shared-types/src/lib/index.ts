@@ -6,3 +6,4 @@ export * from './string-number.type';
 export * from './order.interface';
 export * from './order-item.interface';
 export * from './query-sort-direction.enum';
+export * from './file.interface';
