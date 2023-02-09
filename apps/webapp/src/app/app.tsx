@@ -1,11 +1,7 @@
-
+import Main from '../pages/main/main';
 
 export function App() {
-  return (
-    <>
-      <h1>Guitar shop</h1>
-    </>
-  );
+  return <Main />;
 }
 
 export default App;
