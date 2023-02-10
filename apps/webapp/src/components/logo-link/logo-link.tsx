@@ -3,7 +3,6 @@ import cn from 'classnames';
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { AppRoute } from '../../constants';
-import Logo from '../logo/logo';
 
 type LogoProps = {
   inFooter?: boolean,
@@ -22,13 +21,20 @@ function LogoLink({ inFooter = false }: LogoProps): JSX.Element {
     [`${logoType}__logo`]: true,
   }, 'logo');
 
+
   return (
-    isRoot
-      ? <div className={logoStyle}><Logo/></div>
-      : <Link
-        className={logoStyle}
-        to="/"><Logo/></Link>
-  );
+    <Link
+      style={{ cursor: isRoot ? 'default' : 'pointer' }}
+      className={logoStyle}
+      to="/">
+      <img
+        className="logo__img"
+        src="assets/img/svg/logo.svg"
+        width="70"
+        height="70"
+        alt="Логотип"
+      />
+    </Link>)
 }
 
 export default LogoLink;
