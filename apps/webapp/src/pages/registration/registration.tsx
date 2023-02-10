@@ -1,6 +1,12 @@
+import { Helmet } from 'react-helmet';
+
 function Registration() {
   return (
     <main className="page-content">
+      <Helmet>
+        <title>Регистрация — Guitar-shop</title>
+        <meta name="description" content="Guitar-shop — описание"/>
+      </Helmet>
       <div className="container">
         <section className="login">
           <h1 className="login__title">Регистрация</h1>

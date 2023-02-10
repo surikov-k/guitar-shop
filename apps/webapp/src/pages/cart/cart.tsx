@@ -1,6 +1,12 @@
+import { Helmet } from 'react-helmet';
+
 function Cart() {
   return (
     <main className="page-content">
+      <Helmet>
+        <title>Корзина — Guitar-shop</title>
+        <meta name="description" content="Guitar-shop — описание"/>
+      </Helmet>
       <div className="container">
         <h1 className="title title--bigger page-content__title">Корзина</h1>
         <ul className="breadcrumbs page-content__breadcrumbs page-content__breadcrumbs--on-cart-page">

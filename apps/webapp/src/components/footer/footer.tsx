@@ -1,4 +1,4 @@
-import Logo from '../logo/logo';
+import LogoLink from '../logo-link/logo-link';
 
 function Footer(): JSX.Element {
   return (
@@ -6,7 +6,7 @@ function Footer(): JSX.Element {
       <div className="container">
         <div className="footer__container">
           <div className="footer__logo-wrapper">
-            <Logo noClick location="footer" />
+            <LogoLink inFooter/>
             <div className="socials footer__socials">
               <ul className="socials__list">
                 <li className="socials-item">

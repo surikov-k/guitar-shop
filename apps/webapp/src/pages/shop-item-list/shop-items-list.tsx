@@ -1,8 +1,13 @@
 import Filter from '../../components/filter/filter';
+import { Helmet } from 'react-helmet';
 
 function ShopItemsList() {
   return (
     <main className="page-content">
+      <Helmet>
+        <title>Просмотр товаров — Guitar-shop</title>
+        <meta name="description" content="Guitar-shop — описание"/>
+      </Helmet>
       <section className="product-list">
         <div className="container">
           <h1 className="product-list__title">Список товаров</h1>

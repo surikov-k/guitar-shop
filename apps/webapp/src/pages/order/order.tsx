@@ -1,6 +1,12 @@
+import { Helmet } from 'react-helmet';
+
 function Order() {
   return (
     <main className="page-content">
+      <Helmet>
+        <title>Просмотр заказа — Guitar-shop</title>
+        <meta name="description" content="Guitar-shop — описание"/>
+      </Helmet>
       <section className="order">
         <div className="container">
           <h1 className="order__title">Заказ № 00-000-000</h1>

@@ -1,6 +1,12 @@
+import { Helmet } from 'react-helmet';
+
 function ShopItem() {
   return (
     <main className="page-content">
+      <Helmet>
+        <title>Товар — Guitar-shop</title>
+        <meta name="description" content="Guitar-shop — описание"/>
+      </Helmet>
       <div className="container">
         <h1 className="page-content__title title title--bigger">Товар</h1>
         <ul className="breadcrumbs page-content__breadcrumbs">

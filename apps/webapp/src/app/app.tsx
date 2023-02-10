@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {Helmet} from 'react-helmet';
 
 import Main from '../pages/main/main';
 import Layout from '../components/layout/layout';
@@ -18,6 +19,10 @@ import NotFound from '../pages/not-found/not-found';
 export function App() {
   return (
     <BrowserRouter>
+      <Helmet>
+        <title>Guitar-shop</title>
+        <meta name="description" content="Guitar-shop — описание"/>
+      </Helmet>
       <Routes>
         <Route
           path={AppRoute.Root}

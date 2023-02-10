@@ -1,16 +1,13 @@
-import Logo from '../logo/logo';
+import LogoLink from '../logo-link/logo-link';
 
 function Header(): JSX.Element {
-  console.log('pathname', window.location.pathname)
   return (
     <header
       className="header"
       id="header">
       <div className="container">
         <div className="header__wrapper">
-          <Logo
-            noClick={window.location.pathname === '/'}
-            location="header"/>
+          <LogoLink/>
           <nav className="main-nav">
             <ul className="main-nav__list">
               <li className="main-nav__item">

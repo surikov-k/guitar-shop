@@ -1,6 +1,12 @@
+import { Helmet } from 'react-helmet';
+
 function NotFound() {
   return (
     <main className="page-content">
+      <Helmet>
+        <title>404 — Guitar-shop</title>
+        <meta name="description" content="Guitar-shop — описание"/>
+      </Helmet>
       <div className="container">
         <section className="error">
           <h1 className="error__title">404</h1><span className="error__subtitle">Страница не найдена.</span>
