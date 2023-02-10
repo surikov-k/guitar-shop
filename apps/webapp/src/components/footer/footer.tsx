@@ -1,18 +1,12 @@
+import Logo from '../logo/logo';
+
 function Footer(): JSX.Element {
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer__container">
           <div className="footer__logo-wrapper">
-            <a className="footer__logo logo">
-              <img
-                className="logo__img"
-                src="./assets/img/svg/logo.svg"
-                width="70"
-                height="70"
-                alt="Логотип"
-              />
-            </a>
+            <Logo noClick location="footer" />
             <div className="socials footer__socials">
               <ul className="socials__list">
                 <li className="socials-item">
