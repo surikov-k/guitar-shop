@@ -3,15 +3,17 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from '../pages/main/main';
 import Layout from '../components/layout/layout';
 import ShopItem from '../pages/shop-item/shop-item';
-import Cart from '../pages/cart/cart';
 import Registration from '../pages/registration/registration';
-import ShopItemsList from '../pages/shop-item-list/shop-items-list';
 import Login from '../pages/login/login';
-import AddItem from '../pages/add-item/add-item';
-import NotFound from '../pages/not-found/not-found';
+import { AppRoute, AuthStatus } from '../constants';
+import AuthRoute from '../components/auth-route/auth-route';
+import Cart from '../pages/cart/cart';
+import AdminRoute from '../components/admin-route/admin-route';
 import Order from '../pages/order/order';
+import ShopItemsList from '../pages/shop-item-list/shop-items-list';
+import AddItem from '../pages/add-item/add-item';
 import OrderList from '../pages/order-list/order-list';
-import { AppRoute } from '../constants';
+import NotFound from '../pages/not-found/not-found';
 
 export function App() {
   return (
@@ -30,30 +32,41 @@ export function App() {
             path={AppRoute.Login}
             element={<Login/>}/>
           <Route
-            path={AppRoute.ItemsList}
-            element={<ShopItemsList/>}/>
-          <Route
             path={AppRoute.Item}
             element={<ShopItem/>}/>
+
           <Route
             path={AppRoute.Cart}
-            element={<Cart/>}/>
+            element={
+            <AuthRoute authStatus={AuthStatus.NoAuth}>
+              <Cart/>
+            </AuthRoute>
+          }/>
+
           <Route
-            path={AppRoute.AddItem}
-            element={<AddItem/>}/>
-          <Route
-            path={AppRoute.EditItem}
-            element={<AddItem/>}/>
-          <Route
-            path="orders"
-            element={<OrderList/>}/>
-          <Route
-            path={AppRoute.Order}
-            element={<Order/>}/>
+            path={AppRoute.Admin}
+            element={<AdminRoute authStatus={AuthStatus.Admin}/>}>
+            <Route
+              index
+              element={<ShopItemsList/>}/>
+            <Route
+              path={AppRoute.OrderList}
+              element={<OrderList/>}/>
+            <Route
+              path={AppRoute.AddItem}
+              element={<AddItem/>}/>
+            <Route
+              path={AppRoute.EditItem}
+              element={<AddItem/>}/>
+            <Route
+              path={AppRoute.Order}
+              element={<Order/>}/>
+          </Route>
           <Route
             path="*"
             element={<NotFound/>}/>
         </Route>
+
       </Routes>
     </BrowserRouter>
   );
