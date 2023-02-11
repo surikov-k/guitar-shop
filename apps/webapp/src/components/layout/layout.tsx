@@ -1,9 +1,8 @@
 import { Fragment } from 'react';
-import Header from '../header/header';
-import Footer from '../footer/footer';
+import { Header, Footer } from '../../components';
 import { Outlet } from 'react-router-dom';
 
-function Layout(): JSX.Element {
+export function Layout(): JSX.Element {
   return (
     <Fragment>
       <Header />
@@ -12,5 +11,3 @@ function Layout(): JSX.Element {
     </Fragment>
   );
 }
-
-export default Layout;

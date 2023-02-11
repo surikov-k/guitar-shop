@@ -6,12 +6,10 @@ type AuthRouteProps = {
   children?: JSX.Element;
 }
 
-function AdminRoute({ authStatus, children }: AuthRouteProps): JSX.Element {
+export function AdminRoute({ authStatus, children }: AuthRouteProps): JSX.Element {
   return (
     authStatus === AuthStatus.Admin
       ? children ? children : <Outlet/>
       : <Navigate to={AppRoute.Root}/>
   );
 }
-
-export default AdminRoute;

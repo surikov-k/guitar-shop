@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet';
 
-function ShopItem() {
+export function ShopItem() {
   return (
     <main className="page-content">
       <Helmet>
@@ -261,4 +261,3 @@ function ShopItem() {
 );
 }
 
-export default ShopItem;

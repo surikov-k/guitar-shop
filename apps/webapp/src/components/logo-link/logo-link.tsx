@@ -8,7 +8,7 @@ type LogoProps = {
   inFooter?: boolean,
 };
 
-function LogoLink({ inFooter = false }: LogoProps): JSX.Element {
+export function LogoLink({ inFooter = false }: LogoProps): JSX.Element {
   const [isRoot, setIsRoot] = useState<boolean>(true);
   const location = useLocation();
 
@@ -24,7 +24,7 @@ function LogoLink({ inFooter = false }: LogoProps): JSX.Element {
 
   return (
     <Link
-      style={{ cursor: isRoot ? 'default' : 'pointer' }}
+      style={{ pointerEvents: isRoot ? 'none' : 'auto' }}
       className={logoStyle}
       to="/">
       <img
@@ -36,5 +36,3 @@ function LogoLink({ inFooter = false }: LogoProps): JSX.Element {
       />
     </Link>)
 }
-
-export default LogoLink;

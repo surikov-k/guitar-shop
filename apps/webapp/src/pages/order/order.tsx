@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet';
 
-function Order() {
+export function Order() {
   return (
     <main className="page-content">
       <Helmet>
@@ -75,4 +75,3 @@ function Order() {
   );
 }
 
-export default Order;

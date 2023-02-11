@@ -1,4 +1,4 @@
-function Filter(): JSX.Element {
+export function Filter(): JSX.Element {
   return (
     <form className="catalog-filter">
       <h2 className="title title--bigger catalog-filter__title">Фильтр</h2>
@@ -100,5 +100,3 @@ function Filter(): JSX.Element {
     </form>
   );
 }
-
-export default Filter;

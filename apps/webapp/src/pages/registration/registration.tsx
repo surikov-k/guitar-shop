@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet';
 
-function Registration() {
+export function Registration() {
   return (
     <main className="page-content">
       <Helmet>
@@ -65,4 +65,3 @@ function Registration() {
 );
 }
 
-export default Registration;

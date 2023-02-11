@@ -1,6 +1,6 @@
-import LogoLink from '../logo-link/logo-link';
+import { LogoLink } from '../logo-link';
 
-function Header(): JSX.Element {
+export function Header(): JSX.Element {
   return (
     <header
       className="header"
@@ -71,5 +71,3 @@ function Header(): JSX.Element {
     </header>
   );
 }
-
-export default Header;

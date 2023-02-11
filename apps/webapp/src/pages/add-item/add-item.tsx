@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet';
 
-function AddItem() {
+export function AddItem() {
   return (
     <main className="page-content">
       <Helmet>
@@ -157,5 +157,3 @@ function AddItem() {
     </main>
   );
 }
-
-export default AddItem;

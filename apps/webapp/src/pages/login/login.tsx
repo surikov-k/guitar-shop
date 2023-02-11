@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet';
 
-function Login() {
+export function Login() {
   return (
     <main className="page-content">
       <Helmet>
@@ -63,4 +63,3 @@ function Login() {
   );
 }
 
-export default Login;

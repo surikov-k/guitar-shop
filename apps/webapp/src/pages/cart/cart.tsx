@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet';
 
-function Cart() {
+export function Cart() {
   return (
     <main className="page-content">
       <Helmet>
@@ -147,5 +147,3 @@ function Cart() {
     </main>
   );
 }
-
-export default Cart;

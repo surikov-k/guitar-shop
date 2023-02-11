@@ -1,20 +1,21 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import {Helmet} from 'react-helmet';
 
-import Main from '../pages/main/main';
-import Layout from '../components/layout/layout';
-import ShopItem from '../pages/shop-item/shop-item';
-import Registration from '../pages/registration/registration';
-import Login from '../pages/login/login';
-import { AppRoute, AuthStatus } from '../constants';
-import AuthRoute from '../components/auth-route/auth-route';
-import Cart from '../pages/cart/cart';
-import AdminRoute from '../components/admin-route/admin-route';
-import Order from '../pages/order/order';
-import ShopItemsList from '../pages/shop-item-list/shop-items-list';
-import AddItem from '../pages/add-item/add-item';
-import OrderList from '../pages/order-list/order-list';
-import NotFound from '../pages/not-found/not-found';
+import { AppRoute, AuthStatus } from '../../constants';
+import {
+  AddItem,
+  Cart,
+  Login,
+  Main,
+  NotFound,
+  Order,
+  OrderList,
+  Registration,
+  ShopItem,
+  ShopItemsList
+} from '../../pages';
+
+import { AdminRoute,AuthRoute, Layout } from '../../components';
 
 export function App() {
   return (
@@ -76,5 +77,3 @@ export function App() {
     </BrowserRouter>
   );
 }
-
-export default App;

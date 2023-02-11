@@ -1,6 +1,6 @@
-import LogoLink from '../logo-link/logo-link';
+import { LogoLink } from '../logo-link';
 
-function Footer(): JSX.Element {
+export function Footer(): JSX.Element {
   return (
     <footer className="footer">
       <div className="container">
@@ -136,4 +136,3 @@ function Footer(): JSX.Element {
   );
 }
 
-export default Footer;

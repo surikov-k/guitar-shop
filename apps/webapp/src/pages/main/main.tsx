@@ -1,17 +1,15 @@
-import Filter from '../../components/filter/filter';
-import Card from '../../components/card/card';
-import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
+import { Breadcrumbs, Card, Filter, ModalCartAdd } from '../../components';
 
-function Main(): JSX.Element {
+export function Main(): JSX.Element {
   return (
     <main className="page-content">
       <div className="container">
         <h1 className="page-content__title title title--bigger">
           Каталог гитар
         </h1>
-        <Breadcrumbs />
+        <Breadcrumbs/>
         <div className="catalog">
-          <Filter />
+          <Filter/>
           <div className="catalog-sort">
             <h2 className="catalog-sort__title">Сортировать:</h2>
             <div className="catalog-sort__type">
@@ -40,7 +38,7 @@ function Main(): JSX.Element {
             </div>
           </div>
           <div className="cards catalog__cards">
-            <Card />
+            <Card/>
             <div className="product-card">
               <img
                 src="assets/img/content/catalog-product-1.png"
@@ -51,19 +49,34 @@ function Main(): JSX.Element {
               />
               <div className="product-card__info">
                 <div className="rate product-card__rate">
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-star"></use>
                   </svg>
                   <p className="visually-hidden">Рейтинг: Хорошо</p>
@@ -77,7 +90,9 @@ function Main(): JSX.Element {
                 </p>
               </div>
               <div className="product-card__buttons">
-                <a className="button button--mini" href="#">
+                <a
+                  className="button button--mini"
+                  href="#">
                   Подробнее
                 </a>
                 <a
@@ -98,19 +113,34 @@ function Main(): JSX.Element {
               />
               <div className="product-card__info">
                 <div className="rate product-card__rate">
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-star"></use>
                   </svg>
                   <p className="visually-hidden">Рейтинг: Хорошо</p>
@@ -124,7 +154,9 @@ function Main(): JSX.Element {
                 </p>
               </div>
               <div className="product-card__buttons">
-                <a className="button button--mini" href="#">
+                <a
+                  className="button button--mini"
+                  href="#">
                   Подробнее
                 </a>
                 <a
@@ -145,19 +177,34 @@ function Main(): JSX.Element {
               />
               <div className="product-card__info">
                 <div className="rate product-card__rate">
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-star"></use>
                   </svg>
                   <p className="visually-hidden">Рейтинг: Хорошо</p>
@@ -171,7 +218,9 @@ function Main(): JSX.Element {
                 </p>
               </div>
               <div className="product-card__buttons">
-                <a className="button button--mini" href="#">
+                <a
+                  className="button button--mini"
+                  href="#">
                   Подробнее
                 </a>
                 <a
@@ -192,19 +241,34 @@ function Main(): JSX.Element {
               />
               <div className="product-card__info">
                 <div className="rate product-card__rate">
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-star"></use>
                   </svg>
                   <p className="visually-hidden">Рейтинг: Хорошо</p>
@@ -218,7 +282,9 @@ function Main(): JSX.Element {
                 </p>
               </div>
               <div className="product-card__buttons">
-                <a className="button button--mini" href="#">
+                <a
+                  className="button button--mini"
+                  href="#">
                   Подробнее
                 </a>
                 <a
@@ -239,19 +305,34 @@ function Main(): JSX.Element {
               />
               <div className="product-card__info">
                 <div className="rate product-card__rate">
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-star"></use>
                   </svg>
                   <p className="visually-hidden">Рейтинг: Хорошо</p>
@@ -265,7 +346,9 @@ function Main(): JSX.Element {
                 </p>
               </div>
               <div className="product-card__buttons">
-                <a className="button button--mini" href="#">
+                <a
+                  className="button button--mini"
+                  href="#">
                   Подробнее
                 </a>
                 <a
@@ -286,19 +369,34 @@ function Main(): JSX.Element {
               />
               <div className="product-card__info">
                 <div className="rate product-card__rate">
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-star"></use>
                   </svg>
                   <p className="visually-hidden">Рейтинг: Хорошо</p>
@@ -312,7 +410,9 @@ function Main(): JSX.Element {
                 </p>
               </div>
               <div className="product-card__buttons">
-                <a className="button button--mini" href="#">
+                <a
+                  className="button button--mini"
+                  href="#">
                   Подробнее
                 </a>
                 <a
@@ -333,19 +433,34 @@ function Main(): JSX.Element {
               />
               <div className="product-card__info">
                 <div className="rate product-card__rate">
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-star"></use>
                   </svg>
                   <p className="visually-hidden">Рейтинг: Хорошо</p>
@@ -359,7 +474,9 @@ function Main(): JSX.Element {
                 </p>
               </div>
               <div className="product-card__buttons">
-                <a className="button button--mini" href="#">
+                <a
+                  className="button button--mini"
+                  href="#">
                   Подробнее
                 </a>
                 <a
@@ -380,19 +497,34 @@ function Main(): JSX.Element {
               />
               <div className="product-card__info">
                 <div className="rate product-card__rate">
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-full-star"></use>
                   </svg>
-                  <svg width="12" height="11" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="11"
+                    aria-hidden="true">
                     <use xlinkHref="#icon-star"></use>
                   </svg>
                   <p className="visually-hidden">Рейтинг: Хорошо</p>
@@ -406,7 +538,9 @@ function Main(): JSX.Element {
                 </p>
               </div>
               <div className="product-card__buttons">
-                <a className="button button--mini" href="#">
+                <a
+                  className="button button--mini"
+                  href="#">
                   Подробнее
                 </a>
                 <a
@@ -421,31 +555,41 @@ function Main(): JSX.Element {
           <div className="pagination page-content__pagination">
             <ul className="pagination__list">
               <li className="pagination__page pagination__page--active">
-                <a className="link pagination__page-link" href="1">
+                <a
+                  className="link pagination__page-link"
+                  href="1">
                   1
                 </a>
               </li>
               <li className="pagination__page">
-                <a className="link pagination__page-link" href="2">
+                <a
+                  className="link pagination__page-link"
+                  href="2">
                   2
                 </a>
               </li>
               <li className="pagination__page">
-                <a className="link pagination__page-link" href="3">
+                <a
+                  className="link pagination__page-link"
+                  href="3">
                   3
                 </a>
               </li>
-              <li className="pagination__page pagination__page--next" id="next">
-                <a className="link pagination__page-link" href="2">
+              <li
+                className="pagination__page pagination__page--next"
+                id="next">
+                <a
+                  className="link pagination__page-link"
+                  href="2">
                   Далее
                 </a>
               </li>
             </ul>
           </div>
+          <ModalCartAdd/>
         </div>
       </div>
     </main>
   );
 }
 
-export default Main;

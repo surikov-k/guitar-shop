@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet';
 
-function OrderList() {
+export function OrderList() {
   return (
     <main className="page-content orders__main">
       <Helmet>
@@ -93,4 +93,3 @@ function OrderList() {
   );
 }
 
-export default OrderList;

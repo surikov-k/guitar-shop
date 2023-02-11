@@ -6,7 +6,7 @@ type AuthRouteProps = {
   children: JSX.Element;
 }
 
-function AuthRoute({ authStatus, children }: AuthRouteProps): JSX.Element {
+export function AuthRoute({ authStatus, children }: AuthRouteProps): JSX.Element {
   return (
     authStatus === AuthStatus.Auth
       ? children
@@ -14,4 +14,3 @@ function AuthRoute({ authStatus, children }: AuthRouteProps): JSX.Element {
   );
 }
 
-export default AuthRoute;

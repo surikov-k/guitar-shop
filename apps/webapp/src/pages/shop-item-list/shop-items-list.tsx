@@ -1,7 +1,7 @@
-import Filter from '../../components/filter/filter';
 import { Helmet } from 'react-helmet';
+import { Filter } from '../../components';
 
-function ShopItemsList() {
+export function ShopItemsList() {
   return (
     <main className="page-content">
       <Helmet>
@@ -151,4 +151,3 @@ function ShopItemsList() {
   );
 }
 
-export default ShopItemsList;

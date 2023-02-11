@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet';
 
-function NotFound() {
+export function NotFound() {
   return (
     <main className="page-content">
       <Helmet>
@@ -18,4 +18,3 @@ function NotFound() {
   );
 }
 
-export default NotFound;

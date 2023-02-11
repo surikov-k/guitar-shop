@@ -1,4 +1,4 @@
-function Card(): JSX.Element {
+export function Card(): JSX.Element {
   return (
     <div className="product-card">
       <img
@@ -50,4 +50,3 @@ function Card(): JSX.Element {
   );
 }
 
-export default Card;

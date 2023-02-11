@@ -1,4 +1,4 @@
-function Breadcrumbs(): JSX.Element {
+export function Breadcrumbs(): JSX.Element {
   return (
     <ul className="breadcrumbs page-content__breadcrumbs">
       <li className="breadcrumbs__item">
@@ -13,4 +13,3 @@ function Breadcrumbs(): JSX.Element {
   );
 }
 
-export default Breadcrumbs;
