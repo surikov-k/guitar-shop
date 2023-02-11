@@ -1,4 +1,4 @@
-import { Breadcrumbs, Card, Filter, ModalCartAdd } from '../../components';
+import { Breadcrumbs, Card, Filter, ModalCartAdd, ModalCartDelete } from '../../components';
 
 export function Main(): JSX.Element {
   return (
@@ -587,6 +587,7 @@ export function Main(): JSX.Element {
             </ul>
           </div>
           <ModalCartAdd/>
+          <ModalCartDelete/>
         </div>
       </div>
     </main>
