@@ -1,14 +1,14 @@
 export enum AppRoute {
   Root = '/',
-  Registration = 'registration',
+  Registration = '/registration',
   Login = '/login',
   ItemsList = 'list',
   Item = '/item/:id',
   Cart = '/cart',
   AddItem = 'add',
   EditItem = 'item/:id/edit',
-  Order = 'order/:id',
-  OrderList = 'orders',
+  Order = 'orders/:id',
+  OrderList = '/admin/orders',
   Admin = '/admin',
 }
 

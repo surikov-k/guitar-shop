@@ -1,15 +1,44 @@
 import { Helmet } from 'react-helmet';
+import { Link, Navigate, useParams } from 'react-router-dom';
+import { ordersMock } from '../../mocks/orders.mock';
+import { AppRoute } from '../../constants';
+import { OrderItem } from '../../components';
 
 export function Order() {
+  const { id } = useParams();
+  const orderId = parseInt(id as string, 10);
+
+  if (isNaN(orderId)) {
+    return <Navigate to={AppRoute.Root}/>
+  }
+
+  const order = ordersMock.find((order) => order.id === orderId)
+
+  if (!order) {
+    return null
+  }
+
+  const {
+    totalQuantity,
+    createdAt,
+    totalPrice,
+    orderItems
+  } = order;
+
+  const date = new Date(createdAt);
+  console.log(orderItems)
+
   return (
     <main className="page-content">
       <Helmet>
         <title>Просмотр заказа — Guitar-shop</title>
-        <meta name="description" content="Guitar-shop — описание"/>
+        <meta
+          name="description"
+          content="Guitar-shop — описание"/>
       </Helmet>
       <section className="order">
         <div className="container">
-          <h1 className="order__title">Заказ № 00-000-000</h1>
+          <h1 className="order__title">Заказ № {orderId}</h1>
           <ul className="breadcrumbs">
             <li className="breadcrumbs__item">
               <a
@@ -31,44 +60,30 @@ export function Order() {
             <tbody>
             <tr>
               <td>Общее количество товаров</td>
-              <td>4</td>
+              <td>{totalQuantity}</td>
             </tr>
             <tr>
               <td>Дата заказа</td>
-              <td>13.09.2022</td>
+              <td>{new Intl.DateTimeFormat('ru-Ru').format(date)}</td>
             </tr>
             </tbody>
             <tfoot>
             <tr>
               <td>К оплате</td>
-              <td>70 000 <span>₽</span></td>
+              <td>{totalPrice}<span>₽</span></td>
             </tr>
             </tfoot>
           </table>
           <ul className="order__list order-list">
-            <li className="order-list__item">
-              <div className="order-list__data">
-                <img
-                  src="img/content/catalog-product-1.png"
-                  srcSet="img/content/catalog-product-1@2x.png 2x"
-                  width="60"
-                  height="130"
-                  alt="Картинка гитары"/>
-                <div className="order-list__container">
-                  <p className="order-list__name">ЭлектроГитара Честер bass</p>
-                  <p className="order-list__lot">Артикул: SO757575</p>
-                  <p className="order-list__parameters">Электрогитара, 6 струнная</p>
-                </div>
-              </div>
-              <span className="order-list__quantity">1</span><span className="order-list__price">17 500 ₽</span>
-              <button
-                className="order-list__button button-cross"
-                type="button"
-                aria-label="Закрыть"><span className="button-cross__icon"></span>
-              </button>
-            </li>
+            {
+              orderItems.map((orderItem) => <OrderItem
+                key={orderItem.id}
+                orderItem={orderItem}/>)
+            }
           </ul>
-          <button className="button order__button button--small button--black-border">Вернуться к списку заказов</button>
+          <Link
+            to={AppRoute.OrderList}
+            className="button order__button button--small button--black-border">Вернуться к списку заказов</Link>
         </div>
       </section>
     </main>

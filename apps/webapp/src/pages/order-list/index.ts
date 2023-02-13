@@ -1,1 +1,1 @@
-export {OrderList} from './order-list'
+export {OrdersList} from './orders-list'

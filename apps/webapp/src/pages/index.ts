@@ -7,4 +7,4 @@ export * from './order';
 export * from './order-list';
 export * from './registration';
 export * from './shop-item';
-export * from './shop-item-list';
+export * from './admin-list';

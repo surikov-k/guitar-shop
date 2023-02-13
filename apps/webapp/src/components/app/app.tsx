@@ -1,28 +1,37 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import {Helmet} from 'react-helmet';
+import { Helmet } from 'react-helmet';
 
 import { AppRoute, AuthStatus } from '../../constants';
 import {
   AddItem,
+  AdminList,
   Cart,
   Login,
   Main,
   NotFound,
   Order,
-  OrderList,
+  OrdersList,
   Registration,
-  ShopItem,
-  ShopItemsList
+  ShopItem
 } from '../../pages';
 
-import { AdminRoute,AuthRoute, Layout } from '../../components';
+import { CartItemType, OrderType, ShopItemType } from '../../types';
+import { AdminRoute, AuthRoute, Layout } from '../../components';
 
-export function App() {
+type AppProps = {
+  items: ShopItemType[],
+  cart: CartItemType[],
+  orders: OrderType[],
+}
+
+export function App({ items, cart, orders }: AppProps) {
   return (
     <BrowserRouter>
       <Helmet>
         <title>Guitar-shop</title>
-        <meta name="description" content="Guitar-shop — описание"/>
+        <meta
+          name="description"
+          content="Guitar-shop — описание"/>
       </Helmet>
       <Routes>
         <Route
@@ -30,7 +39,7 @@ export function App() {
           element={<Layout/>}>
           <Route
             index
-            element={<Main/>}/>
+            element={<Main items={items}/>}/>
           <Route
             path={AppRoute.Registration}
             element={<Registration/>}/>
@@ -44,20 +53,20 @@ export function App() {
           <Route
             path={AppRoute.Cart}
             element={
-            <AuthRoute authStatus={AuthStatus.NoAuth}>
-              <Cart/>
-            </AuthRoute>
-          }/>
+              <AuthRoute authStatus={AuthStatus.Auth}>
+                <Cart items={cart}/>
+              </AuthRoute>
+            }/>
 
           <Route
             path={AppRoute.Admin}
             element={<AdminRoute authStatus={AuthStatus.Admin}/>}>
             <Route
               index
-              element={<ShopItemsList/>}/>
+              element={<AdminList items={items}/>}/>
             <Route
               path={AppRoute.OrderList}
-              element={<OrderList/>}/>
+              element={<OrdersList orders={orders}/>}/>
             <Route
               path={AppRoute.AddItem}
               element={<AddItem/>}/>

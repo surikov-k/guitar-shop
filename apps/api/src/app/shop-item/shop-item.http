@@ -43,7 +43,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsI
   "rating": 5
 }
 
-### Get the item comments
+### Get the item commentsMock
 GET localhost:3330/api/item/6/comments
 
 ### Delete an item — admin

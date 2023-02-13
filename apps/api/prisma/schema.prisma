@@ -23,7 +23,7 @@ model User {
   name         String
   passwordHash String
   isAdmin      Boolean
-  comments     Comment[]
+  commentsMock     Comment[]
   Order        Order[]
   File         File[]
 }
@@ -39,8 +39,8 @@ model ShopItem {
   stringsNumber Int
   rating        Float       @default(0)
   price         Float
-  comments      Comment[]
-  orderItems    OrderItem[]
+  commentsMock      Comment[]
+  orderItems    OrderListItem[]
 }
 
 model Comment {
@@ -56,7 +56,7 @@ model Comment {
   shopItemId    Int?
 }
 
-model OrderItem {
+model OrderListItem {
   id         Int       @id @default(autoincrement())
   shopItem   ShopItem? @relation(fields: [shopItemId], references: [id])
   shopItemId Int?
@@ -71,7 +71,7 @@ model Order {
   id            Int         @id @default(autoincrement())
   userId        Int
   User          User        @relation(fields: [userId], references: [id])
-  orderItems    OrderItem[]
+  orderItems    OrderListItem[]
   totalPrice    Float       @default(0)
   totalQuantity Int         @default(0)
   createdAt     DateTime    @default(now())
