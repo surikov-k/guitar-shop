@@ -1,15 +1,28 @@
-export function ModalReview() {
+import { ShopItemType } from '../../types';
+import { ModalContext } from '../../contexts';
+import { useContext } from 'react';
+import { ModalSuccessReview } from '../modal-success-review';
+
+type ModalReviewProps = {
+  item: ShopItemType
+}
+export function ModalReview({item}: ModalReviewProps) {
+  const {close, open} = useContext(ModalContext);
+  const {name} = item;
+  const reviewSubmitHandler = () => {
+    console.log('submit');
+    close();
+    open(<ModalSuccessReview/>)
+  }
   return (
-    <div className="modal is-active modal--review modal-for-ui-kit">
+    <div className="modal is-active modal--review">
       <div className="modal__wrapper">
-        <div
-          className="modal__overlay"
-          data-close-modal></div>
+        <div className="modal__overlay" onClick={close}></div>
         <div className="modal__content">
           <h2 className="modal__header modal__header--review title title--medium">Оставить отзыв</h2>
           <form className="form-review">
             <div className="form-review__wrapper">
-              <h3 className="form-review__title">СURT Z30 Plus</h3>
+              <h3 className="form-review__title">{name}</h3>
               <div>
                 <span className="form-review__label form-review__label--required form-review__label--star">Ваша Оценка</span>
                 <div className="rate rate--reverse">
@@ -19,51 +32,51 @@ export function ModalReview() {
                     name="rate"
                     type="radio"
                     value="5"/>
-                    <label
-                      className="rate__label"
-                      htmlFor="star-5"
-                      title="Отлично"></label>
-                    <input
-                      className="visually-hidden"
-                      id="star-4"
-                      name="rate"
-                      type="radio"
-                      value="4"/>
-                      <label
-                        className="rate__label"
-                        htmlFor="star-4"
-                        title="Хорошо"></label>
-                      <input
-                        className="visually-hidden"
-                        id="star-3"
-                        name="rate"
-                        type="radio"
-                        value="3"/>
-                        <label
-                          className="rate__label"
-                          htmlFor="star-3"
-                          title="Нормально"></label>
-                        <input
-                          className="visually-hidden"
-                          id="star-2"
-                          name="rate"
-                          type="radio"
-                          value="2"/>
-                          <label
-                            className="rate__label"
-                            htmlFor="star-2"
-                            title="Плохо"></label>
-                          <input
-                            className="visually-hidden"
-                            id="star-1"
-                            name="rate"
-                            type="radio"
-                            value="1"/>
-                            <label
-                              className="rate__label"
-                              htmlFor="star-1"
-                              title="Ужасно"></label>
-                            <p className="rate__message">Поставьте оценку</p>
+                  <label
+                    className="rate__label"
+                    htmlFor="star-5"
+                    title="Отлично"></label>
+                  <input
+                    className="visually-hidden"
+                    id="star-4"
+                    name="rate"
+                    type="radio"
+                    value="4"/>
+                  <label
+                    className="rate__label"
+                    htmlFor="star-4"
+                    title="Хорошо"></label>
+                  <input
+                    className="visually-hidden"
+                    id="star-3"
+                    name="rate"
+                    type="radio"
+                    value="3"/>
+                  <label
+                    className="rate__label"
+                    htmlFor="star-3"
+                    title="Нормально"></label>
+                  <input
+                    className="visually-hidden"
+                    id="star-2"
+                    name="rate"
+                    type="radio"
+                    value="2"/>
+                  <label
+                    className="rate__label"
+                    htmlFor="star-2"
+                    title="Плохо"></label>
+                  <input
+                    className="visually-hidden"
+                    id="star-1"
+                    name="rate"
+                    type="radio"
+                    value="1"/>
+                  <label
+                    className="rate__label"
+                    htmlFor="star-1"
+                    title="Ужасно"></label>
+                  <p className="rate__message">Поставьте оценку</p>
                 </div>
               </div>
             </div>
@@ -75,30 +88,32 @@ export function ModalReview() {
               id="advantage"
               type="text"
               autoComplete="off"/>
-              <p className="form-review__warning">Заполните поле</p>
-              <label
-                className="form-review__label form-review__label--required"
-                htmlFor="disadv">Недостатки</label>
-              <input
-                className="form-review__input"
-                id="disadv"
-                type="text"
-                autoComplete="off"/>
-                <p className="form-review__warning">Заполните поле</p>
-                <label
-                  className="form-review__label form-review__label--required form-review__label--textarea"
-                  htmlFor="comment">Комментарий</label>
-                <textarea
-                  className="form-review__input form-review__input--textarea"
-                  id="comment"
-                  autoComplete="off"></textarea>
-                <p className="form-review__warning">Заполните поле</p>
-                <button
-                  className="button button--medium-20 form-review__button"
-                  type="submit">Отправить отзыв
-                </button>
+            <p className="form-review__warning">Заполните поле</p>
+            <label
+              className="form-review__label form-review__label--required"
+              htmlFor="disadv">Недостатки</label>
+            <input
+              className="form-review__input"
+              id="disadv"
+              type="text"
+              autoComplete="off"/>
+            <p className="form-review__warning">Заполните поле</p>
+            <label
+              className="form-review__label form-review__label--required form-review__label--textarea"
+              htmlFor="comment">Комментарий</label>
+            <textarea
+              className="form-review__input form-review__input--textarea"
+              id="comment"
+              autoComplete="off"></textarea>
+            <p className="form-review__warning">Заполните поле</p>
+            <button
+              onClick={reviewSubmitHandler}
+              className="button button--medium-20 form-review__button"
+              type="submit">Отправить отзыв
+            </button>
           </form>
           <button
+            onClick={close}
             className="modal__close-btn button-cross"
             type="button"
             aria-label="Закрыть">

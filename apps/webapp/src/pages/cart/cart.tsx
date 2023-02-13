@@ -1,12 +1,11 @@
 import { Helmet } from 'react-helmet';
-import { CartItemType } from '../../types';
 import { CartItem } from '../../components';
+import { cartMock } from '../../mocks/cart.mock';
 
-type CartProps = {
-  items: CartItemType[]
-}
 
-export function Cart({items}: CartProps) {
+export function Cart() {
+  const items =  cartMock;
+  // const [cart, setCart] = useState<CartItemType[]>(cartMock)
   return (
     <main className="page-content">
       <Helmet>

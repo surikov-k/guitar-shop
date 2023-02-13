@@ -66,7 +66,7 @@ export function AdminList({ items }: AdminListProps) {
             <div className="catalog-cards">
               <ul className="catalog-cards__list">
                 {items.map((item) => (
-                  <AdminShopItem key={item.id} item={item} />
+                  <AdminShopItem key={item.id} shopItem={item} />
                 ))}
               </ul>
             </div>

@@ -32,7 +32,6 @@ export function Filter(): JSX.Element {
             id="electric"
             type="checkbox"
             name="electric"
-            checked
           />
           <label htmlFor="electric">Электрогитары</label>
         </div>
@@ -42,7 +41,6 @@ export function Filter(): JSX.Element {
             id="ukulele"
             type="checkbox"
             name="ukulele"
-            checked
           />
           <label htmlFor="ukulele">Укулеле</label>
         </div>
@@ -57,7 +55,6 @@ export function Filter(): JSX.Element {
             id="4-strings"
             type="checkbox"
             name="4-strings"
-            checked
           />
           <label htmlFor="4-strings">4</label>
         </div>
@@ -67,7 +64,6 @@ export function Filter(): JSX.Element {
             id="6-strings"
             type="checkbox"
             name="6-strings"
-            checked
           />
           <label htmlFor="6-strings">6</label>
         </div>

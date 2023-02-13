@@ -2,14 +2,28 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants';
 import { ShopItemType } from '../../types';
 import { StarRating } from '../star-rating';
+import { useContext } from 'react';
+import { ModalContext } from '../../contexts';
+import { ModalCartAdd } from '../modal-cart-add';
+import { userMock } from '../../mocks/user.mock';
+import { ModalEnter } from '../modal-enter';
 
 type CardProps = {
   item: ShopItemType
 }
 
 export function Card({ item }: CardProps): JSX.Element {
+  const { name: username } = userMock;
+  const { open } = useContext(ModalContext);
   const { id, name, photo, price, rating, comments } = item;
 
+  const buyClickHandler = () => {
+    if (username) {
+      open(<ModalCartAdd item={item}/>)
+      return
+    }
+      open(<ModalEnter/>)
+  }
   return (
     <div className="product-card">
       <img
@@ -39,6 +53,7 @@ export function Card({ item }: CardProps): JSX.Element {
           Подробнее
         </Link>
         <button
+          onClick={buyClickHandler}
           className="button button--red button--mini button--add-to-cart"
         >
           Купить

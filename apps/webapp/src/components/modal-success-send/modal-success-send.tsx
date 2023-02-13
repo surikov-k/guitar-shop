@@ -1,6 +1,6 @@
 export function ModalSuccessSend() {
   return (
-    <div className="modal is-active modal--success modal-for-ui-kit">
+    <div className="modal is-active modal--success">
       <div className="modal__wrapper">
         <div
           className="modal__overlay"

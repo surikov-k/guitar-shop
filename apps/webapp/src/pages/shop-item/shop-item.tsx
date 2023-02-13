@@ -5,8 +5,7 @@ import cn from 'classnames';
 
 import { AppRoute } from '../../constants';
 import { shopItemsMock } from '../../mocks/shop-items.mock';
-import { StarRating } from '../../components';
-import { CommentsList } from '../../components';
+import { CommentsList, StarRating } from '../../components';
 import { commentsMock } from '../../mocks/comments.mock';
 
 enum Tab  {
@@ -121,7 +120,7 @@ export function ShopItem() {
               </button>
             </div>
         </div>
-        <CommentsList comments={commentsMock
+        <CommentsList shopItem={shopItem} comments={commentsMock
           .filter(({id}) => comments.includes(id))}/>
       </div>
     </main>

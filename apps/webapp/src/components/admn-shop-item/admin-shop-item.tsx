@@ -2,12 +2,15 @@ import { ShopItemType } from '../../types';
 import { StarRating } from '../star-rating';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants';
+import { ModalContext } from '../../contexts';
+import { useContext } from 'react';
+import { ModalCartDelete } from '../modal-cart-delete';
 
 type AdminShopItemProps = {
-  item: ShopItemType
+  shopItem: ShopItemType
 }
 
-export function AdminShopItem({ item }: AdminShopItemProps) {
+export function AdminShopItem({ shopItem }: AdminShopItemProps) {
   const {
     id,
     photo,
@@ -16,7 +19,9 @@ export function AdminShopItem({ item }: AdminShopItemProps) {
     rating,
     addedAt,
     price
-  } = item;
+  } = shopItem;
+
+  const {open} = useContext(ModalContext);
 
   const date = new Date(addedAt);
   return (
@@ -45,11 +50,13 @@ export function AdminShopItem({ item }: AdminShopItemProps) {
           to={AppRoute.EditItem.replace(':id', String(id))}
           aria-label="Редактировать товар">Редактировать
         </Link>
-        <Link
-          to={AppRoute.Root}
+        <button
+          onClick={() => {
+            open(<ModalCartDelete shopItem={shopItem}/>)
+          }}
           className="button button--small button--black-border"
           aria-label="Удалить товар">Удалить
-        </Link>
+        </button>
       </div>
     </li>
   );

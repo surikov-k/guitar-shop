@@ -17,6 +17,7 @@ import {
 
 import { CartItemType, OrderType, ShopItemType } from '../../types';
 import { AdminRoute, AuthRoute, Layout } from '../../components';
+import { ModalProvider } from '../../contexts';
 
 type AppProps = {
   items: ShopItemType[],
@@ -27,6 +28,7 @@ type AppProps = {
 export function App({ items, cart, orders }: AppProps) {
   return (
     <BrowserRouter>
+        <ModalProvider>
       <Helmet>
         <title>Guitar-shop</title>
         <meta
@@ -54,7 +56,7 @@ export function App({ items, cart, orders }: AppProps) {
             path={AppRoute.Cart}
             element={
               <AuthRoute authStatus={AuthStatus.Auth}>
-                <Cart items={cart}/>
+                <Cart />
               </AuthRoute>
             }/>
 
@@ -81,8 +83,8 @@ export function App({ items, cart, orders }: AppProps) {
             path="*"
             element={<NotFound/>}/>
         </Route>
-
       </Routes>
+        </ModalProvider>
     </BrowserRouter>
   );
 }
