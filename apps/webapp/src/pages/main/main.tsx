@@ -1,11 +1,9 @@
 import { Breadcrumbs, Card, Filter } from '../../components';
-import { ShopItemType } from '../../types';
+import { useAppSelector } from '../../hooks';
 
-type MainProps = {
-  items: ShopItemType[]
-}
 
-export function Main({ items }: MainProps): JSX.Element {
+export function Main(): JSX.Element {
+  const {shopItems} = useAppSelector((state) => state)
 
   return (
     <main className="page-content">
@@ -44,7 +42,7 @@ export function Main({ items }: MainProps): JSX.Element {
             </div>
           </div>
           <div className="cards catalog__cards">
-            {items.map((item) => <Card
+            {shopItems.map((item) => <Card
               key={item.id}
               item={item}/>)}
           </div>

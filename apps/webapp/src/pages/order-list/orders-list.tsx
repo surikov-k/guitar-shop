@@ -1,17 +1,16 @@
 import { Helmet } from 'react-helmet';
-import { OrderType } from '../../types';
 import { OrderListItem } from '../../components';
+import { useAppSelector } from '../../hooks';
 
-type OrdersListProps = {
-  orders: OrderType[]
-}
-
-export function OrdersList({orders}: OrdersListProps) {
+export function OrdersList() {
+  const { orders } = useAppSelector((store) => store)
   return (
     <main className="page-content orders__main">
       <Helmet>
         <title>Список заказов — Guitar-shop</title>
-        <meta name="description" content="Guitar-shop — описание"/>
+        <meta
+          name="description"
+          content="Guitar-shop — описание"/>
       </Helmet>
       <section className="orders">
         <div className="container">
@@ -53,7 +52,9 @@ export function OrdersList({orders}: OrdersListProps) {
           </div>
           <ul className="orders__list">
             {
-              orders.map((order) => <OrderListItem key={order.id} order={order}/>)
+              orders.map((order) => <OrderListItem
+                key={order.id}
+                order={order}/>)
             }
           </ul>
           <div className="pagination orders__pagination">

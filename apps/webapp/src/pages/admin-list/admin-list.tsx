@@ -1,14 +1,11 @@
 import { Helmet } from 'react-helmet';
 import { AdminShopItem, Filter } from '../../components';
-import { ShopItemType } from '../../types';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants';
+import { useAppSelector } from '../../hooks';
 
-type AdminListProps = {
-  items: ShopItemType[];
-};
-
-export function AdminList({ items }: AdminListProps) {
+export function AdminList() {
+  const {shopItems} = useAppSelector((state) => state)
   return (
     <main className="page-content">
       <Helmet>
@@ -65,7 +62,7 @@ export function AdminList({ items }: AdminListProps) {
             </div>
             <div className="catalog-cards">
               <ul className="catalog-cards__list">
-                {items.map((item) => (
+                {shopItems.map((item) => (
                   <AdminShopItem key={item.id} shopItem={item} />
                 ))}
               </ul>
