@@ -1,9 +1,18 @@
 import { Helmet } from 'react-helmet';
 import { OrderListItem } from '../../components';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useEffect } from 'react';
+import { fetchOrders } from '../../store/api-actions';
 
 export function OrdersList() {
-  const { orders } = useAppSelector((store) => store)
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchOrders())
+  }, [dispatch]);
+
+  const { orders } = useAppSelector((store) => store);
+
   return (
     <main className="page-content orders__main">
       <Helmet>

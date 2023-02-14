@@ -1,5 +1,6 @@
 import { shopItemsMock } from '../../mocks/shop-items.mock';
 import { CartItemType } from '../../types';
+import { BACKEND_IMAGES_URL } from '../../constants';
 
 type CartItemProps = {
   cartItem: CartItemType;
@@ -34,8 +35,8 @@ export function CartItem({ cartItem }: CartItemProps) {
       </button>
       <div className="cart-item__image">
         <img
-          src={`assets/img/content/${photo}`}
-          srcSet={`assets/img/content/${photo}@2x.png 2x`}
+          src={`${BACKEND_IMAGES_URL}/${photo}`}
+          srcSet={`${BACKEND_IMAGES_URL}/${photo}@2x.png 2x`}
           width="55"
           height="130"
           alt={name}

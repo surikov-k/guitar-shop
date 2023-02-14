@@ -22,3 +22,4 @@ export * from './cart-item';
 export * from './order-list-item';
 export * from './order-item';
 export * from './admn-shop-item';
+export * from './error-message';

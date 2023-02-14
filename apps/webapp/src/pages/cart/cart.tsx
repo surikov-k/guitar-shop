@@ -5,7 +5,6 @@ import { cartMock } from '../../mocks/cart.mock';
 
 export function Cart() {
   const items =  cartMock;
-  // const [cart, setCart] = useState<CartItemType[]>(cartMock)
   return (
     <main className="page-content">
       <Helmet>
@@ -18,13 +17,13 @@ export function Cart() {
           <li className="breadcrumbs__item">
             <a
               className="link"
-              href="./main.html">Главная
+              href="/">Главная
             </a>
           </li>
           <li className="breadcrumbs__item">
             <a
               className="link"
-              href="./main.html">Каталог
+              href="/">Каталог
             </a>
           </li>
           <li className="breadcrumbs__item">

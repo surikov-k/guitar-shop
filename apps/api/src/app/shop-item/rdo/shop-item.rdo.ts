@@ -77,7 +77,7 @@ export class ShopItemRdo {
   @Transform(({ value }) => value.map(({ id }) => id))
   public comments: number[];
 
-  @ApiProperty({
+  @ApiProperty({ 
     description: 'Guitar rating',
     example: 4,
   })

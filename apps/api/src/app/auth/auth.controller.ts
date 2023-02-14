@@ -1,18 +1,14 @@
-import {
-  Body,
-  Controller,
-  Get,
-  HttpCode,
-  HttpStatus,
-  Param,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Post, UseGuards, } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { AuthService } from './auth.service';
 import { LoginDto, RegisterDto } from './dto';
 import { LoggedRdo, UserRdo } from './rdo';
 import { fillObject } from '@guitar-shop/core';
+import { JwtAuthGuard } from '../../common/guards';
+import { GetUserPayload } from '../../common/decorators';
+import { UserPayload } from '@guitar-shop/shared-types';
+import { UserPayloadRdo } from './rdo/user-payload.rdo';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -46,14 +42,14 @@ export class AuthController {
     return fillObject(LoggedRdo, { ...user, accessToken });
   }
 
-  @Get(':id')
+  @Get()
+  @UseGuards(JwtAuthGuard)
   @ApiResponse({
-    type: UserRdo,
+    type: UserPayloadRdo,
     status: HttpStatus.OK,
-    description: 'User is found',
+    description: 'Check user status',
   })
-  async get(@Param('id') id: string) {
-    const user = await this.authService.get(parseInt(id, 10));
-    return fillObject(UserRdo, user);
+  async checkAuth(@GetUserPayload() payload: UserPayload) {
+    return fillObject(UserPayloadRdo, payload);
   }
 }

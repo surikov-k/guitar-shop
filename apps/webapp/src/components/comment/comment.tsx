@@ -6,12 +6,19 @@ type CommentProps = {
 }
 
 export function Comment({ comment }: CommentProps) {
-  const { createdAt, rating, advantages, disadvantages, text } = comment;
+  const {
+    author,
+    createdAt,
+    rating,
+    advantages,
+    disadvantages,
+    text
+  } = comment;
   const date = new Date(createdAt);
   return (
     <div className="review">
       <div className="review__wrapper">
-        <h4 className="review__title review__title--author title title--lesser">Иванов Максим</h4>
+        <h4 className="review__title review__title--author title title--lesser">{author.name}</h4>
         <span className="review__date">{new Intl.DateTimeFormat('ru-Ru', {
           day: '2-digit',
           month: 'long'

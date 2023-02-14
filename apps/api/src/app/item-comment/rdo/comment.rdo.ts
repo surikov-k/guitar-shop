@@ -1,5 +1,6 @@
-import { Expose } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
+import { UserRdo } from '../../auth/rdo';
 
 export class CommentRdo {
   @ApiProperty({
@@ -10,11 +11,12 @@ export class CommentRdo {
   id: number;
 
   @ApiProperty({
-    description: 'User ID',
+    description: 'User',
     example: '2',
   })
   @Expose()
-  userId: number;
+  @Type(() => UserRdo)
+  author: UserRdo;
 
 
   @ApiProperty({

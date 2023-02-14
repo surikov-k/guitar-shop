@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
-import { AppRoute, AuthStatus } from '../../constants';
+import { AppRoute } from '../../constants';
 import {
   AddItem,
   AdminList,
@@ -16,8 +16,10 @@ import {
 } from '../../pages';
 import { AdminRoute, AuthRoute, Layout } from '../../components';
 import { ModalProvider } from '../../contexts';
+import { useAppSelector } from '../../hooks';
 
 export function App() {
+  const { authStatus } = useAppSelector((state) => state)
   return (
     <BrowserRouter>
       <ModalProvider>
@@ -47,14 +49,14 @@ export function App() {
             <Route
               path={AppRoute.Cart}
               element={
-                <AuthRoute authStatus={AuthStatus.Auth}>
+                <AuthRoute authStatus={authStatus}>
                   <Cart/>
                 </AuthRoute>
               }/>
 
             <Route
               path={AppRoute.Admin}
-              element={<AdminRoute authStatus={AuthStatus.Admin}/>}>
+              element={<AdminRoute authStatus={authStatus}/>}>
               <Route
                 index
                 element={<AdminList/>}/>

@@ -26,5 +26,6 @@ Content-Type: application/json
   "password": "123456"
 }
 
-### Get a user
-GET localhost:3330/api/auth/3 HTTP/1.1
+### Check a user
+GET localhost:3330/api/auth/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImVtYWlsIjoiYWJieS5tb250Z29tZXJ5QGV4YW1wbGUuY29tIiwibmFtZSI6IlpvaWxhIERpY2tpIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjc2MzgxMTYzLCJleHAiOjE2NzYzODIwNjN9.j1AzZ8Dh3QsL8VRPESHP4-r_L7oQwreuY8bLJsC1RfE

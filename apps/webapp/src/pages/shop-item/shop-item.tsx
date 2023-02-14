@@ -1,12 +1,12 @@
 import { Helmet } from 'react-helmet';
 import { Navigate, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import cn from 'classnames';
 
-import { AppRoute } from '../../constants';
-import { shopItemsMock } from '../../mocks/shop-items.mock';
+import { AppRoute, BACKEND_IMAGES_URL } from '../../constants';
 import { CommentsList, StarRating } from '../../components';
-import { commentsMock } from '../../mocks/comments.mock';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchCommentsAction } from '../../store/api-actions';
 
 enum Tab  {
   Params,
@@ -14,23 +14,42 @@ enum Tab  {
 }
 
 export function ShopItem() {
+  const {shopItems} = useAppSelector((state) => state)
   const [tab, setTab] = useState<Tab>(Tab.Params)
+
+  const dispatch = useAppDispatch();
+
   const { id } = useParams()
   const shopItemId = parseInt(id as string, 10);
+
+  useEffect(() => {
+    dispatch(fetchCommentsAction(shopItemId))
+  }, [dispatch, id, shopItemId]);
+
+  const { comments } = useAppSelector((state) => state)
 
   if (isNaN(shopItemId)) {
     return <Navigate to={AppRoute.Root}/>;
   }
-
-  const shopItem = shopItemsMock
+  const shopItem = shopItems
     .find(({id}) => shopItemId === id);
+
 
   if (shopItem === undefined) {
     return <Navigate to={AppRoute.Root}/>;
   }
 
-
-  const {name, photo, rating, comments, code, type,stringsNumber, description, price} = shopItem;
+  const {
+    name,
+    photo,
+    rating,
+    commentsNumber,
+    code,
+    type,
+    stringsNumber,
+    description,
+    price
+  } = shopItem;
 
   return (
     <main className="page-content">
@@ -60,8 +79,8 @@ export function ShopItem() {
         <div className="product-container">
           <img
             className="product-container__img"
-            src={`assets/img/content/${photo}`}
-            srcSet={`assets/img/content/${photo}@2x.png 2x`}
+            src={`${BACKEND_IMAGES_URL}/${photo}`}
+            srcSet={`${BACKEND_IMAGES_URL}/${photo}@2x.png 2x`}
             width="90"
             height="235"
             alt=""/>
@@ -69,7 +88,7 @@ export function ShopItem() {
               <h2 className="product-container__title title title--big title--uppercase">{name}</h2>
               <div className="rate product-container__rating">
                 <StarRating rating={rating} size={14}>
-                  <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{comments.length}</p>
+                  <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{commentsNumber}</p>
                 </StarRating>
               </div>
               <div className="tabs">
@@ -120,8 +139,7 @@ export function ShopItem() {
               </button>
             </div>
         </div>
-        <CommentsList shopItem={shopItem} comments={commentsMock
-          .filter(({id}) => comments.includes(id))}/>
+        <CommentsList shopItem={shopItem} comments={comments}/>
       </div>
     </main>
 );

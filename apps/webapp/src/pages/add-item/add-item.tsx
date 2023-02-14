@@ -1,8 +1,8 @@
 import { Helmet } from 'react-helmet';
 import { Link, Navigate, useParams } from 'react-router-dom';
-import { AppRoute } from '../../constants';
-import { shopItemsMock } from '../../mocks/shop-items.mock';
-import { GuitarType } from '@guitar-shop/shared-types';
+import { AppRoute, BACKEND_IMAGES_URL } from '../../constants';
+import { GuitarTypeRus } from '../../types';
+import { useAppSelector } from '../../hooks';
 
 const emptyShopItem = {
   code: null,
@@ -18,6 +18,7 @@ const emptyShopItem = {
 export function AddItem() {
   const { id } = useParams();
   const shopItemId = parseInt(id as string, 10);
+  const {shopItems} = useAppSelector((state) => state)
 
   if (isNaN(shopItemId) && id !== undefined) {
     return <Navigate to={AppRoute.Root} />;
@@ -28,7 +29,7 @@ export function AddItem() {
   if (id === undefined) {
     shopItem = emptyShopItem;
   } else {
-    shopItem = shopItemsMock.find(({ id }) => id === shopItemId);
+    shopItem = shopItems.find(({ id }) => id === shopItemId);
     if (!shopItem) {
       return <Navigate to={AppRoute.Root} />;
     }
@@ -78,11 +79,11 @@ export function AddItem() {
                   {photo ? (
                     <img
                       className="edit-item-image__image"
-                      src={`assets/img/content/${photo}`}
-                      srcSet={`img/content/add-item-1@2x.png 2x`}
+                      src={`${BACKEND_IMAGES_URL}/${photo}`}
+                      srcSet={`${BACKEND_IMAGES_URL}/${photo}@2x.png 2x`}
                       width="133"
                       height="332"
-                      alt="СURT Z30 Plus"
+                      alt={name}
                     />
                   ) : (
                     ''
@@ -104,7 +105,7 @@ export function AddItem() {
                   id="guitar"
                   name="item-type"
                   value="guitar"
-                  checked={type ? type === GuitarType.Acoustic: false}
+                  checked={type ? type === GuitarTypeRus.Acoustic: false}
                 />
                 <label htmlFor="guitar">Акустическая гитара</label>
                 <input
@@ -112,7 +113,7 @@ export function AddItem() {
                   id="el-guitar"
                   name="item-type"
                   value="el-guitar"
-                  checked={type ? type === GuitarType.Electric: false}
+                  checked={type ? type === GuitarTypeRus.Electric: false}
                 />
                 <label htmlFor="el-guitar">Электрогитара</label>
                 <input
@@ -120,7 +121,7 @@ export function AddItem() {
                   id="ukulele"
                   name="item-type"
                   value="ukulele"
-                  checked={type ? type === GuitarType.Ukulele: false}
+                  checked={type ? type === GuitarTypeRus.Ukulele: false}
                 />
                 <label htmlFor="ukulele">Укулеле</label>
               </div>

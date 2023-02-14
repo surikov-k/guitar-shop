@@ -3,7 +3,11 @@ import { CommentType } from '../types';
 export const commentsMock: CommentType[] = [
   {
     id: 1,
-    userId: 1,
+    author: {
+      email: 'petrova@mail.dev',
+      isAdmin: true,
+      name: 'Перова Ольга'
+    },
     shopItemId: 1,
     advantages: 'Хороший корпус, чистый звук, стурны хорошего качества',
     disadvantages: 'Тугие колонки',
@@ -13,7 +17,11 @@ export const commentsMock: CommentType[] = [
   },
   {
     id: 2,
-    userId: 2,
+    author: {
+      email: 'petrova@mail.dev',
+      isAdmin: true,
+      name: 'Перова Ольга'
+    },
     shopItemId: 1,
     advantages: 'Хороший корпус, чистый звук, стурны хорошего качества',
     disadvantages: 'Тугие колонки',
@@ -23,7 +31,11 @@ export const commentsMock: CommentType[] = [
   },
   {
     id: 3,
-    userId: 1,
+    author: {
+      email: 'petrova@mail.dev',
+      isAdmin: true,
+      name: 'Перова Ольга'
+    },
     shopItemId: 1,
     advantages: 'Хороший корпус, чистый звук, стурны хорошего качества',
     disadvantages: 'Тугие колонки',

@@ -1,77 +1,72 @@
 import cn from 'classnames';
-
-import { LogoLink } from '../logo-link';
 import { Link } from 'react-router-dom';
 
-import { AppRoute } from '../../constants';
-
-import { userMock } from '../../mocks/user.mock';
+import { LogoLink } from '../logo-link';
+import { AppRoute, AuthStatus } from '../../constants';
+import { useAppSelector } from '../../hooks';
 
 export function Header(): JSX.Element {
-  const user = userMock;
-
-  const {isAdmin, name} = user;
+  const { authStatus, username } = useAppSelector((state) => state);
 
   return (
     <header
       className={cn('header', {
-        'header--logged': name && !isAdmin,
-        'header--admin': name && isAdmin,
+        'header--logged': authStatus === AuthStatus.Auth,
+        'header--admin': authStatus === AuthStatus.Admin,
       })}
-      id="header">
+      id="header"
+    >
       <div className="container">
         <div className="header__wrapper">
-          <LogoLink/>
+          <LogoLink />
           <nav className="main-nav">
             <ul className="main-nav__list">
               <li className="main-nav__item">
                 <Link
                   className="link main-nav__link link--current"
-                  to={AppRoute.Root}>
+                  to={AppRoute.Root}
+                >
                   Каталог
                 </Link>
               </li>
-              {
-                (name && !isAdmin) && <>
-                    <li className="main-nav__item">
-                      <Link
-                          className="link main-nav__link"
-                          to={AppRoute.Root}>
-                        Где купить?
-                      </Link>
-                    </li>
-                    <li className="main-nav__item">
-                      <Link
-                          className="link main-nav__link"
-                          to={AppRoute.Root}>
-                        О компании
-                      </Link>
-                    </li>
-                  </>
-              }
-              {
-                (name && isAdmin) && <>
-                    <li className="main-nav__item">
-                      <Link
-                          className="link main-nav__link"
-                          to={AppRoute.OrderList}>
-                        Список заказов
-                      </Link>
-                    </li>
-                    <li className="main-nav__item">
-                      <Link
-                          className="link main-nav__link"
-                          to={AppRoute.Admin}>
-                        Список товаров
-                      </Link>
-                    </li>
-                  </>
-              }
-
+              {authStatus === AuthStatus.Auth && (
+                <>
+                  <li className="main-nav__item">
+                    <Link className="link main-nav__link" to={AppRoute.Root}>
+                      Где купить?
+                    </Link>
+                  </li>
+                  <li className="main-nav__item">
+                    <Link className="link main-nav__link" to={AppRoute.Root}>
+                      О компании
+                    </Link>
+                  </li>
+                </>
+              )}
+              {authStatus === AuthStatus.Admin && (
+                <>
+                  <li className="main-nav__item">
+                    <Link
+                      className="link main-nav__link"
+                      to={AppRoute.OrderList}
+                    >
+                      Список заказов
+                    </Link>
+                  </li>
+                  <li className="main-nav__item">
+                    <Link className="link main-nav__link" to={AppRoute.Admin}>
+                      Список товаров
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
           </nav>
           <div className="header__container">
-            <span className="header__user-name" style={{marginRight: '6px'}}>{`${name}`}</span>
+            <span
+              className="header__user-name"
+              style={{ marginRight: '6px' }}
+            >{`${username}`}</span>
             <Link
               className="header__link"
               to={AppRoute.Login}

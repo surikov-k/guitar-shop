@@ -23,7 +23,7 @@ model User {
   name         String
   passwordHash String
   isAdmin      Boolean
-  commentsMock     Comment[]
+  comments     Comment[]
   Order        Order[]
   File         File[]
 }

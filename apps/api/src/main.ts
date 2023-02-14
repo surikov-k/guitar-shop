@@ -11,6 +11,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { useContainer } from 'class-validator';
 
 const DEFAULT_PORT = 3333;
+const port = process.env.PORT || DEFAULT_PORT;
+
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -36,7 +38,6 @@ async function bootstrap() {
     })
   )
 
-  const port = process.env.PORT || DEFAULT_PORT;
   await app.listen(port);
 
   Logger.log(

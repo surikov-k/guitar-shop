@@ -39,6 +39,9 @@ export class ItemCommentRepository implements CrudRepository<ItemCommentEntity, 
     return this.prisma.comment.findMany({
       take: COMMENTS_LIMIT,
       where: { shopItemId },
+      include: {
+        author: true,
+      },
       orderBy: [
         {createdAt: 'desc'}
       ]
