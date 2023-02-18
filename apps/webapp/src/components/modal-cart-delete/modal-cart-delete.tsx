@@ -21,7 +21,6 @@ export function ModalCartDelete({ shopItem }: ModalTypeRemoveProps) {
   } = shopItem;
 
   const deleteHandler = () => {
-    console.log('delete');
     close();
   };
 

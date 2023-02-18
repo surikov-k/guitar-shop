@@ -32,7 +32,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImVtYWlsI
 }
 
 ### Create a comment for the shop item — auth user
-POST localhost:3330/api/item/6/comments HTTP/1.1
+POST localhost:3330/api/item/1/comments HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoid2hpdG5leS5tb3NzQGV4YW1wbGUuY29tIiwibmFtZSI6IlRlbmEgSGVhdGhjb3RlIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTY3NTg3NDY0OSwiZXhwIjoxNjc1ODc1NTQ5fQ.tveElhf7jUf3wN9438CWf7yS8PtjRW9Y0_36ZnfuAPg
 

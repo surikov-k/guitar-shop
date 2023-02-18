@@ -10,7 +10,6 @@ export function ModalReview({item}: ModalReviewProps) {
   const {close, open} = useContext(ModalContext);
   const {name} = item;
   const reviewSubmitHandler = () => {
-    console.log('submit');
     close();
     open(<ModalSuccessReview/>)
   }

@@ -14,7 +14,6 @@ export function OrderListItem({ order }: OrderItemProps) {
   } = order;
 
   const date = new Date(createdAt);
-
   return (
     <li
       className="orders__item">

@@ -1,0 +1,837 @@
+openapi: 3.0.0
+paths:
+  /api/auth/register:
+    post:
+      operationId: AuthController_register
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterDto'
+      responses:
+        '201':
+          description: A new user has been successfully created.
+      tags: &ref_0
+        - auth
+  /api/auth/login:
+    post:
+      operationId: AuthController_login
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginDto'
+      responses:
+        '200':
+          description: The user has been successfully logged in
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoggedRdo'
+        '401':
+          description: Password or Login is wrong.
+      tags: *ref_0
+  /api/auth:
+    get:
+      operationId: AuthController_checkAuth
+      parameters: []
+      responses:
+        '200':
+          description: Check user status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPayloadRdo'
+      tags: *ref_0
+  /api/comment/{id}:
+    get:
+      operationId: ItemCommentController_get
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Comment is found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentRdo'
+      tags:
+        - comments
+  /api/item:
+    get:
+      operationId: ShopItemController_index
+      parameters:
+        - name: limit
+          required: false
+          in: query
+          description: A limit of the shop items per page
+          schema:
+            default: 9
+            type: number
+        - name: page
+          required: false
+          in: query
+          description: A page of the shop items list
+          schema:
+            default: 1
+            type: number
+        - name: type
+          required: false
+          in: query
+          description: Shop items list guitar type filter
+          schema:
+            enum:
+              - Electric
+              - Acoustic
+              - Ukulele
+            type: string
+        - name: strings
+          required: false
+          in: query
+          description: Shop items list strings filter
+          schema:
+            enum:
+              - four
+              - six
+              - seven
+              - twelve
+            type: string
+        - name: sort
+          required: false
+          in: query
+          description: Shop items list sort type
+          schema:
+            enum:
+              - price
+              - rating
+              - added
+            type: string
+        - name: direction
+          required: false
+          in: query
+          description: Shop items list sort direction
+          schema:
+            enum:
+              - desc
+              - asc
+            type: string
+      responses:
+        '200':
+          description: The list of shop items is found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ShopItemListRdo'
+      tags: &ref_1
+        - shop-item
+    post:
+      operationId: ShopItemController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateShopItemDto'
+      responses:
+        '201':
+          description: Shop item is created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShopItemRdo'
+      tags: *ref_1
+  /api/item/{id}:
+    get:
+      operationId: ShopItemController_get
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: The shop item is found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShopItemRdo'
+      tags: *ref_1
+    patch:
+      operationId: ShopItemController_update
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateShopItemDto'
+      responses:
+        default:
+          description: Shop item is updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShopItemRdo'
+      tags: *ref_1
+    delete:
+      operationId: ShopItemController_delete
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '204':
+          description: Shop item is deleted
+      tags: *ref_1
+  /api/item/{id}/comments:
+    post:
+      operationId: ShopItemController_createComment
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCommentDto'
+      responses:
+        '201':
+          description: Comment is created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentRdo'
+      tags: *ref_1
+    get:
+      operationId: ShopItemController_getComments
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Comment is found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentRdo'
+        '404':
+          description: Comment is not found
+      tags: *ref_1
+  /api/order:
+    post:
+      operationId: ShopOrderController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderDto'
+      responses:
+        '201':
+          description: The order was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderRdo'
+      tags: &ref_2
+        - order
+    get:
+      operationId: ShopOrderController_index
+      parameters:
+        - name: price
+          required: false
+          in: query
+          description: Filter list by the order price
+          schema:
+            type: number
+        - name: date
+          required: false
+          in: query
+          description: Filter list by the order creation date
+          schema:
+            type: string
+        - name: limit
+          required: false
+          in: query
+          description: 'A limit of the orders per page '
+          schema:
+            default: 9
+            type: number
+        - name: page
+          required: false
+          in: query
+          description: 'A page of the orders list '
+          schema:
+            default: 1
+            type: number
+      responses:
+        '200':
+          description: The orders list was found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderRdo'
+      tags: *ref_2
+  /api/order/{id}:
+    get:
+      operationId: ShopOrderController_get
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: The order was found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderRdo'
+        '404':
+          description: The order wasn't found
+      tags: *ref_2
+    delete:
+      operationId: ShopOrderController_delete
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '204':
+          description: The order was deleted
+      tags: *ref_2
+  /api/file/{id}:
+    post:
+      operationId: ShopFileController_saveFile
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '201':
+          description: File is created
+info:
+  title: Guitar shop
+  description: Guitar shop API
+  version: '1.0'
+  contact: {}
+tags: []
+servers: []
+components:
+  schemas:
+    RegisterDto:
+      type: object
+      properties:
+        email:
+          type: string
+          description: User's unique email
+          example: abby.montgomery@example.com
+        name:
+          type: string
+          description: User's name
+          example: Zoila Dicki
+          minimum: 1
+          maximum: 15
+        password:
+          type: string
+          description: User's password
+          minimum: 6
+          maximum: 12
+          example: '123456'
+      required:
+        - email
+        - name
+        - password
+    LoginDto:
+      type: object
+      properties:
+        email:
+          type: string
+          description: User's unique email
+          example: abby.montgomery@example.com
+        password:
+          type: string
+          description: User's password
+          example: '123456'
+      required:
+        - email
+        - password
+    LoggedRdo:
+      type: object
+      properties:
+        id:
+          type: number
+          description: User's unique id
+          example: 100
+        email:
+          type: string
+          description: User's unique email
+          example: abby.montgomery@example.com
+        name:
+          type: string
+          description: User's name
+          example: abby montgomery
+        isAdmin:
+          type: boolean
+          description: Is the user admin or not
+          example: true
+        accessToken:
+          type: string
+          description: Access token
+          example: >-
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+      required:
+        - id
+        - email
+        - name
+        - isAdmin
+        - accessToken
+    UserPayloadRdo:
+      type: object
+      properties:
+        email:
+          type: string
+          description: User's unique email
+          example: abby.montgomery@example.com
+        name:
+          type: string
+          description: User's name
+          example: abby montgomery
+        isAdmin:
+          type: boolean
+          description: Is the user admin or not
+          example: true
+      required:
+        - email
+        - name
+        - isAdmin
+    UserRdo:
+      type: object
+      properties:
+        id:
+          type: number
+          description: User's unique id
+          example: 100
+        email:
+          type: string
+          description: User's unique email
+          example: abby.montgomery@example.com
+        name:
+          type: string
+          description: User's name
+          example: Abby Montgomery
+        isAdmin:
+          type: boolean
+          description: Is the user admin or not
+          example: true
+      required:
+        - id
+        - email
+        - name
+        - isAdmin
+    CommentRdo:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Comment ID
+          example: '1'
+        author:
+          description: User
+          example: '2'
+          allOf:
+            - $ref: '#/components/schemas/UserRdo'
+        shopItemId:
+          type: number
+          description: Shop item ID
+          example: '12'
+        advantages:
+          type: string
+          description: Shop item advantages
+          example: Good feel, fun to play, good tone, solid electronics, good pick up
+        disadvantages:
+          type: string
+          description: Shop item disadvantages
+          example: >-
+            Fret buzz, flat sound, no pick, no dip switch sticker, and nut is
+            off, poor fitting knob
+        text:
+          type: string
+          description: Comment text
+          example: >-
+            So in the 30 years I have been playing I have owned 5 Les Pauls and
+            have played more than can be counted. I have always had love hate
+            relationship with Les Pauls. I love the look, love the sound.
+            However, I always hated the necks, too thick and sticky. Also they
+            are incredibly heavy.
+        rating:
+          type: number
+          description: The shop item rating
+          example: 4
+        createdAt:
+          format: date-time
+          type: string
+          description: Comment creation date
+          example: '2023-02-05T22:22:48.418Z'
+      required:
+        - id
+        - author
+        - shopItemId
+        - advantages
+        - disadvantages
+        - text
+        - rating
+        - createdAt
+    ShopItemListRdo:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Guitar ID
+          example: '12'
+        name:
+          type: string
+          description: Guitar name
+          example: Fender Player Stratocaster
+        description:
+          type: string
+          description: Guitar description
+          example: >-
+            Weight-relieved mahogany body with maple top. Mahogany neck with
+            asymmetrical profile, rosewood fingerboard with compound radius.
+            Dual Tradbucker pickups with coil split, coil tap and phase
+            controls. Nashville bridge, stopbar tailpiece and locking Grover
+            tuners.
+        addedAt:
+          type: string
+          description: The date the guitar was added
+          example: '2023-02-05T19:10:34.009Z'
+        photo:
+          type: string
+          description: Guitar photos ids
+          example: &ref_3
+            - 1
+        type:
+          type: object
+          description: Guitar type
+          example: Electric
+        code:
+          type: string
+          description: Vendor code
+          example: '1500000000287968'
+        stringsNumber:
+          type: object
+          description: The number of strings
+          example: 6
+        price:
+          type: number
+          description: Guitar price
+          example: 2399
+        rating:
+          type: number
+          description: Guitar rating
+          example: 4
+        comments:
+          type: number
+          description: Number of comments
+          example: 3
+      required:
+        - id
+        - name
+        - description
+        - addedAt
+        - photo
+        - type
+        - code
+        - stringsNumber
+        - price
+        - rating
+        - comments
+    ShopItemRdo:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Guitar ID
+          example: '12'
+        name:
+          type: string
+          description: Guitar name
+          example: Fender Player Stratocaster
+        description:
+          type: string
+          description: Guitar description
+          example: >-
+            Weight-relieved mahogany body with maple top. Mahogany neck with
+            asymmetrical profile, rosewood fingerboard with compound radius.
+            Dual Tradbucker pickups with coil split, coil tap and phase
+            controls. Nashville bridge, stopbar tailpiece and locking Grover
+            tuners.
+        addedAt:
+          type: string
+          description: The date the guitar was added
+          example: '2023-02-05T19:10:34.009Z'
+        photo:
+          type: string
+          description: Guitar photos ids
+          example: *ref_3
+        type:
+          type: object
+          description: Guitar type
+          example: Electric
+        code:
+          type: string
+          description: Vendor code
+          example: '1500000000287968'
+        stringsNumber:
+          type: object
+          description: The number of strings
+          example: 6
+        price:
+          type: number
+          description: Guitar price
+          example: 2399
+        comments:
+          description: Comments IDs
+          example: 2399
+          type: array
+          items:
+            type: string
+        rating:
+          type: number
+          description: Guitar rating
+          example: 4
+      required:
+        - id
+        - name
+        - description
+        - addedAt
+        - photo
+        - type
+        - code
+        - stringsNumber
+        - price
+        - comments
+        - rating
+    CreateCommentDto:
+      type: object
+      properties:
+        advantages:
+          type: string
+          description: Shop item advantages
+          minimum: 50
+          maximum: 100
+          example: Good feel, fun to play, good tone, solid electronics, good pick up
+        disadvantages:
+          type: string
+          description: Shop item disadvantages
+          minimum: 50
+          maximum: 100
+          example: >-
+            Fret buzz, flat sound, no pick, no dip switch sticker, and nut is
+            off, poor fitting knob
+        text:
+          type: string
+          description: Comment text
+          minimum: 5
+          maximum: 1024
+          example: >-
+            So in the 30 years I have been playing I have owned 5 Les Pauls and
+            have played more than can be counted. I have always had love hate
+            relationship with Les Pauls. I love the look, love the sound.
+            However, I always hated the necks, too thick and sticky. Also they
+            are incredibly heavy.
+        rating:
+          type: number
+          description: The shop item rating. A number from 1 to 5
+          minimum: 1
+          maximum: 5
+          example: 4
+      required:
+        - advantages
+        - disadvantages
+        - text
+        - rating
+    CreateShopItemDto:
+      type: object
+      properties:
+        name:
+          type: string
+          description: >-
+            Guitar name. Minimum length 10 characters, maximum length 100
+            characters.
+          example: Fender Player Stratocaster
+        description:
+          type: string
+          description: >-
+            Guitar description. The minimum length is 20 characters, the maximum
+            length is 1024 characters.
+          example: >-
+            Weight-relieved mahogany body with maple top. Mahogany neck with
+            asymmetrical profile, rosewood fingerboard with compound radius.
+            Dual Tradbucker pickups with coil split, coil tap and phase
+            controls. Nashville bridge, stopbar tailpiece and locking Grover
+            tuners.
+        type:
+          type: object
+          description: >-
+            Guitar type. Required. One option from the list: Electric, Acoustic,
+            Ukulele.
+          example: Electric
+        code:
+          type: string
+          description: >-
+            Vendor code. Required. The minimum length is 5 characters, the
+            maximum is 40 characters.
+          example: '1500000000287968'
+        stringsNumber:
+          type: object
+          description: 'The number of strings. Required. One of the options: 4, 6, 7, 12'
+          example: 6
+        price:
+          type: number
+          description: Price. Required. A non-negative number between 100 and 1,000,000
+          example: 2399
+      required:
+        - name
+        - description
+        - type
+        - code
+        - stringsNumber
+        - price
+    UpdateShopItemDto:
+      type: object
+      properties:
+        name:
+          type: string
+          description: >-
+            Guitar name. Minimum length 10 characters, maximum length 100
+            characters.
+          example: Fender Player Stratocaster
+        description:
+          type: string
+          description: >-
+            Guitar description. The minimum length is 20 characters, the maximum
+            length is 1024 characters.
+          example: >-
+            Weight-relieved mahogany body with maple top. Mahogany neck with
+            asymmetrical profile, rosewood fingerboard with compound radius.
+            Dual Tradbucker pickups with coil split, coil tap and phase
+            controls. Nashville bridge, stopbar tailpiece and locking Grover
+            tuners.
+        type:
+          type: object
+          description: >-
+            Guitar type. Required. One option from the list: Electric, Acoustic,
+            Ukulele.
+          example: Electric
+        code:
+          type: string
+          description: >-
+            Vendor code. Required. The minimum length is 5 characters, the
+            maximum is 40 characters.
+          example: '1500000000287968'
+        stringsNumber:
+          type: object
+          description: 'The number of strings. Required. One of the options: 4, 6, 7, 12'
+          example: 6
+        price:
+          type: number
+          description: Price. Required. A non-negative number between 100 and 1,000,000
+          example: 2399
+    CreateOrderItemDto:
+      type: object
+      properties:
+        shopItemId:
+          type: number
+          description: Shop item ID
+          example: '12'
+        quantity:
+          type: number
+          description: Quantity
+          example: '2'
+      required:
+        - shopItemId
+        - quantity
+    CreateOrderDto:
+      type: object
+      properties:
+        orderItems:
+          description: List of order items
+          example: ''
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateOrderItemDto'
+      required:
+        - orderItems
+    OrderRdo:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Order ID
+          example: '1'
+        userId:
+          type: number
+          description: User ID
+          example: '1'
+        orderItems:
+          description: Order item
+          example: ''
+          type: array
+          items:
+            type: string
+        totalPrice:
+          type: number
+          description: Total order price
+          example: '1000'
+        totalQuantity:
+          type: number
+          description: Total items in the order
+          example: '5'
+        createdAt:
+          format: date-time
+          type: string
+          description: Order creation date
+          example: '2023-02-05T14:34:17'
+      required:
+        - id
+        - userId
+        - orderItems
+        - totalPrice
+        - totalQuantity
+        - createdAt

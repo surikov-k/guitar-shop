@@ -1,18 +1,19 @@
 import { Helmet } from 'react-helmet';
 import { Link, Navigate, useParams } from 'react-router-dom';
-import { ordersMock } from '../../mocks/orders.mock';
 import { AppRoute } from '../../constants';
 import { OrderItem } from '../../components';
+import { useAppSelector } from '../../hooks';
 
 export function Order() {
   const { id } = useParams();
   const orderId = parseInt(id as string, 10);
+  const { orders } = useAppSelector((store) => store);
 
   if (isNaN(orderId)) {
     return <Navigate to={AppRoute.Root}/>
   }
 
-  const order = ordersMock.find((order) => order.id === orderId)
+  const order = orders.find((order) => order.id === orderId)
 
   if (!order) {
     return null
@@ -26,7 +27,6 @@ export function Order() {
   } = order;
 
   const date = new Date(createdAt);
-  console.log(orderItems)
 
   return (
     <main className="page-content">
@@ -77,8 +77,8 @@ export function Order() {
           <ul className="order__list order-list">
             {
               orderItems.map((orderItem) => <OrderItem
-                key={orderItem.id}
-                orderItem={orderItem}/>)
+                key={orderItem.shopItemId}
+                orderItem={orderItem}/>) 
             }
           </ul>
           <Link

@@ -19,7 +19,6 @@ export function ModalCartAdd({ item }: ModalTypeAddProps) {
     }
     const cartItem = cart
       .find(({ shopItemId }) => shopItemId === id);
-    console.log(cartItem)
     if (cartItem) {
       cartItem.quantity++;
     } else {

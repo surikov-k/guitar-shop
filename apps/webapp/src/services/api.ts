@@ -26,7 +26,7 @@ export const createApi = (): AxiosInstance => {
       config.headers["Access-Control-Allow-Origin"] = "*";
 
       if (token) {
-        config.headers['x-token'] = token;
+        config.headers['Authorization'] = `Bearer ${token}`;
       }
       return config;
     });

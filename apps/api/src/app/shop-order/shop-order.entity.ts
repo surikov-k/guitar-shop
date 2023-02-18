@@ -8,7 +8,7 @@ export class ShopOrderEntity implements Entity<ShopOrderEntity>, Order {
   orderItems: OrderItem[];
   totalPrice: number;
   totalQuantity: number;
-
+ 
   constructor(order: Order) {
     this.fillEntity(order);
   }

@@ -1,0 +1,10 @@
+{
+  "workbench.colorCustomizations": {
+    "badge.background": "#ffca27",
+    "panel.border": "#393939",
+    "editorLineNumber.foreground": "#49595f",
+    "activityBar.background": "#3F2725",
+    "titleBar.activeBackground": "#593734",
+    "titleBar.activeForeground": "#FCFAF9"
+  }
+}

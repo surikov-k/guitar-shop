@@ -1,5 +1,5 @@
 ### Upload a shop item picture — admin
-POST http://localhost:3330/api/file/6 HTTP/1.1
+POST http://localhost:3330/api/file/3 HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImVtYWlsIjoiYWJieS5tb250Z29tZXJ5QGV4YW1wbGUuY29tIiwibmFtZSI6IlpvaWxhIERpY2tpIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjc1ODYwNTE4LCJleHAiOjE2NzU4NjE0MTh9.rQAGKosTRveoI7uY8yhlxfBT1nm_ga2FhPk_5TEiftQ
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
