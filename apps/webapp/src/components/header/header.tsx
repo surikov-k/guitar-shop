@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 
 import { LogoLink } from '../logo-link';
 import { AppRoute, AuthStatus } from '../../constants';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { dropToken } from '../../services';
+import { requireAuthorization, saveUser } from '../../store/actions';
 
 export function Header(): JSX.Element {
-  const { authStatus, username } = useAppSelector((state) => state);
+  const { authStatus, user } = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
 
   return (
     <header
@@ -18,7 +21,7 @@ export function Header(): JSX.Element {
     >
       <div className="container">
         <div className="header__wrapper">
-          <LogoLink />
+          <LogoLink/>
           <nav className="main-nav">
             <ul className="main-nav__list">
               <li className="main-nav__item">
@@ -32,12 +35,16 @@ export function Header(): JSX.Element {
               {authStatus === AuthStatus.Auth && (
                 <>
                   <li className="main-nav__item">
-                    <Link className="link main-nav__link" to={AppRoute.Root}>
+                    <Link
+                      className="link main-nav__link"
+                      to={AppRoute.Root}>
                       Где купить?
                     </Link>
                   </li>
                   <li className="main-nav__item">
-                    <Link className="link main-nav__link" to={AppRoute.Root}>
+                    <Link
+                      className="link main-nav__link"
+                      to={AppRoute.Root}>
                       О компании
                     </Link>
                   </li>
@@ -54,7 +61,9 @@ export function Header(): JSX.Element {
                     </Link>
                   </li>
                   <li className="main-nav__item">
-                    <Link className="link main-nav__link" to={AppRoute.Admin}>
+                    <Link
+                      className="link main-nav__link"
+                      to={AppRoute.Admin}>
                       Список товаров
                     </Link>
                   </li>
@@ -64,11 +73,20 @@ export function Header(): JSX.Element {
           </nav>
           <div className="header__container">
             <span
+              title="Выйти"
               className="header__user-name"
               style={{ marginRight: '6px' }}
-            >{`${username}`}</span>
+            >{`${user?.name}`}</span>
             <Link
               className="header__link"
+              onClick={(e) => {
+                if (authStatus !== AuthStatus.NoAuth) {
+                  e.preventDefault();
+                  dropToken();
+                  dispatch(requireAuthorization(AuthStatus.NoAuth))
+                  dispatch(saveUser(null));
+                }
+              }}
               to={AppRoute.Login}
               aria-label="Перейти в личный кабинет"
             >

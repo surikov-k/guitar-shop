@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException, } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 import { ShopUserRepository } from '../shop-user/shop-user.repository';
@@ -23,7 +19,8 @@ export class AuthService {
     const userData = { email, name, isAdmin: false, passwordHash: '' };
 
     const userEntity = await new ShopUserEntity(userData).setPassword(password);
-    return this.userRepository.create(userEntity);
+    const user = await this.userRepository.create(userEntity);
+    return this.login(user)
   }
 
   async verify(dto: LoginDto) {

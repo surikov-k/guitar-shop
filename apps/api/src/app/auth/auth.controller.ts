@@ -3,7 +3,7 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { AuthService } from './auth.service';
 import { LoginDto, RegisterDto } from './dto';
-import { LoggedRdo, UserRdo } from './rdo';
+import { LoggedRdo } from './rdo';
 import { fillObject } from '@guitar-shop/core';
 import { JwtAuthGuard } from '../../common/guards';
 import { GetUserPayload } from '../../common/decorators';
@@ -22,8 +22,8 @@ export class AuthController {
   })
   @HttpCode(HttpStatus.CREATED)
   async register(@Body() dto: RegisterDto) {
-    const user = await this.authService.register(dto);
-    return fillObject(UserRdo, user);
+    const { accessToken } = await this.authService.register(dto);
+    return accessToken;
   }
 
   @Post('login')
@@ -39,7 +39,7 @@ export class AuthController {
   public async login(@Body() dto: LoginDto) {
     const user = await this.authService.verify(dto);
     const { accessToken } = await this.authService.login(user);
-    return fillObject(LoggedRdo, { ...user, accessToken });
+    return { accessToken };
   }
 
   @Get()

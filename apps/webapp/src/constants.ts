@@ -4,6 +4,7 @@ export enum AppRoute {
   Root = '/',
   Registration = '/registration',
   Login = '/login',
+  Logout = '/logout',
   ItemsList = 'list',
   Item = '/item/:id',
   Cart = '/cart',
@@ -34,3 +35,4 @@ export enum ApiRoute {
   Orders = 'order',
   ShopItems = 'item',
 }
+

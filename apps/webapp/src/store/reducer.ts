@@ -1,8 +1,17 @@
 import { createReducer } from '@reduxjs/toolkit';
 
 import { CartItemType, CommentType, OrderType, ShopItemType } from '../types';
-import { loadItemComments, loadOrders, loadShopItems, requireAuthorization, saveUsername, setError } from './actions';
+import {
+  loadItemComments,
+  loadOrders,
+  loadShopItems,
+  postItemComment,
+  requireAuthorization,
+  saveUser,
+  setError
+} from './actions';
 import { AuthStatus } from '../constants';
+import { User } from '@guitar-shop/shared-types';
 
 const initialState: {
   shopItems: ShopItemType[];
@@ -10,7 +19,7 @@ const initialState: {
   cart: CartItemType[];
   orders: OrderType[];
   authStatus: AuthStatus;
-  username: string;
+  user: User | null;
   error: string | null;
 } = {
   shopItems: [],
@@ -18,7 +27,7 @@ const initialState: {
   comments: [],
   orders: [],
   authStatus: AuthStatus.Unknown,
-  username: '',
+  user: null,
   error: null
 };
 
@@ -30,11 +39,14 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(requireAuthorization, (state, action) => {
       state.authStatus = action.payload;
     })
-    .addCase(saveUsername, (state, action) => {
-      state.username = action.payload;
+    .addCase(saveUser, (state, action) => {
+      state.user = action.payload;
     })
     .addCase(loadItemComments, (state, action) => {
       state.comments = action.payload;
+    })
+    .addCase(postItemComment, (state, action) => {
+      state.comments = [...state.comments, action.payload]
     })
     .addCase(loadOrders,(state, action) => {
       state.orders = action.payload;
