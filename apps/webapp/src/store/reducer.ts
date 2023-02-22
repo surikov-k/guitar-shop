@@ -47,6 +47,12 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(postItemComment, (state, action) => {
       state.comments = [...state.comments, action.payload]
+      const {shopItemId, rating} = action.payload
+      const shopItem = state.shopItems.find(({id }) => id === shopItemId);
+      if (shopItem) {
+        shopItem.rating = (shopItem.rating * shopItem.commentsNumber + rating )/ (shopItem.commentsNumber + 1);
+        shopItem.commentsNumber++;
+      }
     })
     .addCase(loadOrders,(state, action) => {
       state.orders = action.payload;

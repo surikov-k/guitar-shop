@@ -4,7 +4,7 @@ import { useAppSelector } from '../../hooks';
 
 export function Main(): JSX.Element {
   const {shopItems} = useAppSelector((state) => state)
-
+  console.log(shopItems)
   return (
     <main className="page-content">
       <div className="container">
