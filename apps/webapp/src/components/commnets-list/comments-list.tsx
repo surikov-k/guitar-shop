@@ -3,24 +3,32 @@ import { Comment } from '../comment';
 import { ModalContext } from '../../contexts';
 import { useContext } from 'react';
 import { ModalReview } from '../modal-reveiew';
+import { useAppSelector } from '../../hooks';
+import { AuthStatus } from '../../constants';
 
 type CommentsListProps = {
   shopItem: ShopItemType,
   comments: CommentType[]
 }
 
-export function CommentsList({shopItem, comments }: CommentsListProps) {
+export function CommentsList({ shopItem, comments }: CommentsListProps) {
   const { open } = useContext(ModalContext);
+  const { authStatus } = useAppSelector((state) => state)
   return (
     <section className="reviews">
       <h3 className="reviews__title title title--bigger">Отзывы</h3>
-      <button
-        onClick={() => {
-          open(<ModalReview item={shopItem}/>)
-        }}
-        className="button button--red-border button--big reviews__sumbit-button"
-      >Оставить отзыв
-      </button>
+      {
+        authStatus === AuthStatus.NoAuth
+          ? null
+          : <button
+            onClick={() => {
+              open(<ModalReview item={shopItem}/>)
+            }}
+            className="button button--red-border button--big reviews__sumbit-button"
+          >Оставить отзыв
+          </button>
+      }
+
       {
         comments.map((comment) => <Comment
           key={comment.id}

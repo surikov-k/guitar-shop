@@ -53,7 +53,7 @@ export class ShopItemService {
     const comment = await this.commentRepository.create(entity);
     const rating = await this.calculateRating(shopItemId);
     await this.update(shopItemId, { rating });
-    return comment;
+    return this.commentRepository.findById(comment.id);
   }
 
   async calculateRating(id): Promise<number> {

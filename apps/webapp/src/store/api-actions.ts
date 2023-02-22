@@ -10,7 +10,15 @@ import {
   UserData
 } from '../types';
 import { AxiosInstance } from 'axios';
-import { loadItemComments, loadOrders, loadShopItems, requireAuthorization, saveUser, setError } from './actions';
+import {
+  loadItemComments,
+  loadOrders,
+  loadShopItems,
+  postItemComment,
+  requireAuthorization,
+  saveUser,
+  setError
+} from './actions';
 import { ApiRoute, AuthStatus, SHOW_ERROR_TIMEOUT } from '../constants';
 import { adaptShopItem } from '../utils/utils';
 import { store } from './';
@@ -52,17 +60,19 @@ export const fetchCommentsAction = createAsyncThunk<void, ShopItemType['id'], {
   }
 )
 
-export const postCommentAction = createAsyncThunk<void, Comment, {
+export const postCommentAction = createAsyncThunk<void, {
+  comment: Comment,
+  shopItemId: number
+}, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
 }>(
   'data/postComment',
-  async (comment: Comment, { dispatch, extra: api }) => {
-    const { shopItemId } = comment
+  async ({ comment, shopItemId }: {comment: Comment, shopItemId: number }, { dispatch, extra: api }) => {
     const { data } = await api
-      .post(ApiRoute.ItemComments.replace(':id', String(shopItemId)));
-    dispatch(postCommentAction(data))
+      .post(ApiRoute.ItemComments.replace(':id', String(shopItemId)), comment);
+    dispatch(postItemComment(data))
   }
 )
 

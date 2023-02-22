@@ -31,7 +31,10 @@ export class ItemCommentRepository implements CrudRepository<ItemCommentEntity, 
 
   public async findById(id: number): Promise<Comment | null> {
     return this.prisma.comment.findFirst({
-      where: { id }
+      where: { id },
+      include: {
+        author: true,
+      },
     })
   }
 

@@ -3,6 +3,13 @@ import { Expose } from 'class-transformer';
 
 export class UserPayloadRdo {
   @ApiProperty({
+    description: 'User\'s id',
+    example: 5
+  })
+  @Expose()
+  public id: number;
+
+  @ApiProperty({
     description: 'User\'s unique email',
     example: 'abby.montgomery@example.com'
   })

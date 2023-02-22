@@ -8,13 +8,13 @@ import { CommentsList, StarRating } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchCommentsAction } from '../../store/api-actions';
 
-enum Tab  {
+enum Tab {
   Params,
   Description
 }
 
 export function ShopItem() {
-  const {shopItems} = useAppSelector((state) => state)
+  const { shopItems } = useAppSelector((state) => state)
   const [tab, setTab] = useState<Tab>(Tab.Params)
 
   const dispatch = useAppDispatch();
@@ -26,13 +26,13 @@ export function ShopItem() {
     dispatch(fetchCommentsAction(shopItemId))
   }, [dispatch, id, shopItemId]);
 
-  const { comments } = useAppSelector((state) => state)
+  const comments = useAppSelector((state) => [...state.comments].sort((commentA, commentB) => new Date(commentB.createdAt).getDate() - new Date(commentA.createdAt).getDate()))
 
   if (isNaN(shopItemId)) {
     return <Navigate to={AppRoute.Root}/>;
   }
   const shopItem = shopItems
-    .find(({id}) => shopItemId === id);
+    .find(({ id }) => shopItemId === id);
 
 
   if (shopItem === undefined) {
@@ -55,7 +55,9 @@ export function ShopItem() {
     <main className="page-content">
       <Helmet>
         <title>{`${name}`} — Guitar-shop</title>
-        <meta name="description" content="Guitar-shop — описание"/>
+        <meta
+          name="description"
+          content="Guitar-shop — описание"/>
       </Helmet>
       <div className="container">
         <h1 className="page-content__title title title--bigger">Товар</h1>
@@ -84,64 +86,68 @@ export function ShopItem() {
             width="90"
             height="235"
             alt=""/>
-            <div className="product-container__info-wrapper">
-              <h2 className="product-container__title title title--big title--uppercase">{name}</h2>
-              <div className="rate product-container__rating">
-                <StarRating rating={rating} size={14}>
-                  <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{commentsNumber}</p>
-                </StarRating>
-              </div>
-              <div className="tabs">
-                <button
-                  className={cn('button',
-                    {'button--black-border': tab !== Tab.Params},
-                    'button--medium', 'tabs__button')}
+          <div className="product-container__info-wrapper">
+            <h2 className="product-container__title title title--big title--uppercase">{name}</h2>
+            <div className="rate product-container__rating">
+              <StarRating
+                rating={rating}
+                size={14}>
+                <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{commentsNumber}</p>
+              </StarRating>
+            </div>
+            <div className="tabs">
+              <button
+                className={cn('button',
+                  { 'button--black-border': tab !== Tab.Params },
+                  'button--medium', 'tabs__button')}
                 onClick={() => setTab(Tab.Params)}>
 
-                  Характеристики
-                </button>
-                <button
-                  className={cn('button',
-                    {'button--black-border': tab !== Tab.Description},
-                    'button--medium', 'tabs__button')}
-                  onClick={() => setTab(Tab.Description)}>
-                  Описание
-                </button>
-                <div
-                  className="tabs__content"
-                  id="characteristics">
-                  <table className={cn('tabs__table', {'hidden': tab !== Tab.Params})}>
-                    <tbody>
-                    <tr className="tabs__table-row">
-                      <td className="tabs__title">Артикул:</td>
-                      <td className="tabs__value">{code}</td>
-                    </tr>
-                    <tr className="tabs__table-row">
-                      <td className="tabs__title">Тип:</td>
-                      <td className="tabs__value">{type}</td>
-                    </tr>
-                    <tr className="tabs__table-row">
-                      <td className="tabs__title">Количество струн:</td>
-                      <td className="tabs__value">{stringsNumber} струнная</td>
-                    </tr>
-                    </tbody>
-                  </table>
-                  <p className={cn('tabs__product-description', {'hidden': tab !== Tab.Description})}>{description}</p>
-                </div>
+                Характеристики
+              </button>
+              <button
+                className={cn('button',
+                  { 'button--black-border': tab !== Tab.Description },
+                  'button--medium', 'tabs__button')}
+                onClick={() => setTab(Tab.Description)}>
+                Описание
+              </button>
+              <div
+                className="tabs__content"
+                id="characteristics">
+                <table className={cn('tabs__table', { 'hidden': tab !== Tab.Params })}>
+                  <tbody>
+                  <tr className="tabs__table-row">
+                    <td className="tabs__title">Артикул:</td>
+                    <td className="tabs__value">{code}</td>
+                  </tr>
+                  <tr className="tabs__table-row">
+                    <td className="tabs__title">Тип:</td>
+                    <td className="tabs__value">{type}</td>
+                  </tr>
+                  <tr className="tabs__table-row">
+                    <td className="tabs__title">Количество струн:</td>
+                    <td className="tabs__value">{stringsNumber} струнная</td>
+                  </tr>
+                  </tbody>
+                </table>
+                <p className={cn('tabs__product-description', { 'hidden': tab !== Tab.Description })}>{description}</p>
               </div>
             </div>
-            <div className="product-container__price-wrapper">
-              <p className="product-container__price-info product-container__price-info--title">Цена:</p>
-              <p className="product-container__price-info product-container__price-info--value">{price} ₽</p>
-              <button
-                className="button button--red button--big product-container__button"
-                >Добавить в корзину
-              </button>
-            </div>
+          </div>
+          <div className="product-container__price-wrapper">
+            <p className="product-container__price-info product-container__price-info--title">Цена:</p>
+            <p className="product-container__price-info product-container__price-info--value">{price} ₽</p>
+            <button
+              className="button button--red button--big product-container__button"
+            >Добавить в корзину
+            </button>
+          </div>
         </div>
-        <CommentsList shopItem={shopItem} comments={comments}/>
+        <CommentsList
+          shopItem={shopItem}
+          comments={comments}/>
       </div>
     </main>
-);
+  );
 }
 
