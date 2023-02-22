@@ -1,7 +1,7 @@
 import { CommentType, ShopItemType } from '../../types';
 import { Comment } from '../comment';
 import { ModalContext } from '../../contexts';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { ModalReview } from '../modal-reveiew';
 import { useAppSelector } from '../../hooks';
 import { AuthStatus } from '../../constants';
@@ -11,7 +11,11 @@ type CommentsListProps = {
   comments: CommentType[]
 }
 
+const COMMENTS_PER_CLICK = 3
+
 export function CommentsList({ shopItem, comments }: CommentsListProps) {
+  const [displayed, setDisplayed] = useState<number>(COMMENTS_PER_CLICK);
+
   const { open } = useContext(ModalContext);
   const { authStatus } = useAppSelector((state) => state)
   return (
@@ -30,17 +34,27 @@ export function CommentsList({ shopItem, comments }: CommentsListProps) {
       }
 
       {
-        comments.map((comment) => <Comment
-          key={comment.id}
-          comment={comment}/>)
+        comments
+          .map((comment) => <Comment
+            key={comment.id}
+            comment={comment}/>)
+          .slice(0, displayed)
       }
-
-      <button className="button button--medium reviews__more-button">Показать еще отзывы</button>
+      {
+        comments.length > displayed
+          ? <button
+            className="button button--medium reviews__more-button"
+            onClick={() => setDisplayed(displayed + COMMENTS_PER_CLICK)}
+          >Показать еще отзывы
+        </button>
+          : ''
+      }
       <button
         className="button button--up button--red-border button--big reviews__up-button"
         style={{ zIndex: 1 }}
       >Наверх
       </button>
     </section>
-  );
+  )
+    ;
 }
